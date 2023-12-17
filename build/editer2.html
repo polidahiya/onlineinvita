@@ -1,0 +1,2807 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invitaion maker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Ephesis&family=Great+Vibes&family=Monoton&family=Poppins:ital,wght@1,200&family=Rubik:wght@300&family=Satisfy&family=Tangerine&family=Tourney:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        --white: white;
+        --bg: #131921;
+        --theme: rgb(0, 170, 255);
+        background-color: var(--bg);
+        font-family: Calibri;
+        width: 100vw;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        background-color: transparent;
+        width: 3px;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background-color: rgb(0, 157, 255);
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        height: 60px;
+        width: 100%;
+        background-color: var(--bg);
+        display: flex;
+        align-items: center;
+        padding: 0px 30px;
+        box-sizing: border-box;
+        color: white;
+        z-index: 200;
+        border-bottom: 1px solid white;
+      }
+      .leftnav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .menubutton {
+        height: 40px;
+        aspect-ratio: 1;
+        cursor: pointer;
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 50%;
+      }
+      .menubutton:hover {
+        background-color: rgb(85, 85, 85);
+      }
+      .logo {
+        margin: auto;
+        margin-bottom: 0;
+        font-size: 30px;
+        font-family: Dancing Script;
+        font-weight: 600;
+        background-image: linear-gradient(
+          135deg,
+          rgb(0, 102, 255),
+          rgb(192, 238, 255)
+        );
+        background-clip: Text;
+        color: transparent;
+        -webkit-background-clip: Text;
+      }
+      /*  */
+      .rightnav {
+        margin-left: auto;
+      }
+      .profile {
+        height: 40px;
+        aspect-ratio: 1;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+      }
+      /*  */
+      main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+      }
+      .preview {
+        position: relative;
+        width: 60%;
+        max-width: 350px;
+        aspect-ratio: 3/5;
+        background-image: url(Assets/Backgrounds/Static/background1.jpg);
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        border: 2px solid white;
+      }
+      /*  */
+      .mobiletoolmenu {
+        display: none;
+      }
+      .toolmenu {
+        height: calc(100vh - 60px);
+        width: 200px;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        background-color: rgb(57, 57, 57);
+        transition: 0.3s;
+        border-radius: 0px 10px 10px 0px;
+        box-sizing: border-box;
+        padding: 30px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        z-index: 100;
+      }
+      .toolmenu::-webkit-scrollbar {
+        width: 0;
+      }
+      .toolmenuInOutButton {
+        position: absolute;
+        top: calc(50% - 35px);
+        right: -20px;
+        height: 70px;
+        width: 20px;
+        background-color: rgb(57, 57, 57);
+        clip-path: polygon(0% 0%, 100% 30%, 100% 70%, 0% 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+      }
+      .toolmenuInOutButton img {
+        width: 100%;
+        transform: rotate(180deg);
+      }
+      /*  */
+      .tooloption {
+        height: 40px;
+        min-height: 40px;
+        width: 100%;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: rgb(66, 66, 66);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        position: relative;
+      }
+      .tooloption:hover {
+        background-color: rgb(85, 85, 85);
+      }
+      .tooloption img {
+        height: 50%;
+        aspect-ratio: 1;
+        margin-left: 15px;
+      }
+      .tooloption p {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .tooloption .eff {
+        position: absolute;
+        left: 0;
+        top: auto;
+        height: 20px;
+        width: 3px;
+        border-radius: 0 3px 3px 0px;
+        background-color: var(--theme);
+        display: none;
+      }
+      .tooloption:nth-of-type(1) .eff {
+        display: block;
+      }
+      .savebutton {
+        margin-top: auto;
+        display: flex;
+      }
+      .savebutton:hover {
+        background-color: rgb(1, 201, 1);
+      }
+      /*  */
+      .selectMenu {
+        height: calc(100vh - 60px);
+        width: 200px;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        background-color: rgba(57, 57, 57);
+        transition: 0.3s;
+        border-radius: 10px 0px 0px 10px;
+        box-sizing: border-box;
+        padding-bottom: 10px;
+        z-index: 100;
+      }
+      .selectMenuInOutButton {
+        position: absolute;
+        top: calc(50% - 35px);
+        left: -20px;
+        height: 70px;
+        width: 20px;
+        background-color: rgb(57, 57, 57);
+        clip-path: polygon(0% 30%, 100% 0%, 100% 100%, 0% 70%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+      }
+      .selectMenuInOutButton img {
+        width: 100%;
+      }
+      /*  */
+      .sidemenubackgrounds,
+      .imagesettings,
+      .imagemasks,
+      .fontfamilycontainer,
+      .animationscontainer,
+      .effectscontainer {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        padding: 0px 20px;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        display: none;
+      }
+      /* backgrounds */
+      .sidemenubackgrounds {
+        display: block;
+      }
+      .sidemenubackgrounds .backgrounds {
+        width: 100%;
+        aspect-ratio: 3/5;
+        background-position: center;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+      .bgselectcontainer {
+        position: sticky;
+        top: 0;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow-x: scroll;
+        background-color: rgb(57, 57, 57);
+      }
+      .bgselectcontainer::-webkit-scrollbar {
+        height: 2px;
+      }
+      .bgselectcontainer div {
+        height: 100%;
+        color: white;
+        border-radius: 50px;
+        padding-inline: 10px;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      /* Image */
+      .imagesettings {
+        overflow-x: hidden;
+        color: white;
+      }
+      .selectnewimage,
+      .replaceimage {
+        background-color: rgb(66, 66, 66);
+        width: 100%;
+        height: 40px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        margin-top: 10px;
+      }
+      .selectnewimage input,
+      .replaceimage input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+        z-index: 1;
+      }
+      /*  */
+      .imagesettingtitle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+      }
+      .imagesettingtitle button {
+        height: 70%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: url(Assets/uicomponents/rotate-ccw-svg.svg) center / cover;
+        cursor: pointer;
+      }
+      .moreoptionscontainer {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+      .moreoptions {
+        height: 35px;
+        aspect-ratio: 1;
+        background-color: rgb(66, 66, 66);
+        border-radius: 5px;
+        cursor: pointer;
+        background-size: 80% 80%;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .moreoptions:nth-of-type(1) {
+        background-image: url(Assets/uicomponents/arrow-invert.svg);
+        transform: rotateZ(90deg);
+      }
+      .moreoptions:nth-of-type(2) {
+        background-image: url(Assets/uicomponents/arrow-invert.svg);
+      }
+      /*  */
+      .effectsinnercontainer {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2px;
+        position: relative;
+      }
+      .effectsinnercontainer div {
+        position: absolute;
+        right: 0;
+        top: 15px;
+      }
+      /* masks */
+      .maksbuttonscontainer {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 20px 0px 10px 0px;
+        gap: 10px;
+        background-color: rgb(57, 57, 57);
+      }
+      .maksbuttonscontainer div {
+        cursor: pointer;
+        width: 100%;
+        height: 80%;
+        border-radius: 100px;
+        color: white;
+        display: grid;
+        place-content: center;
+        user-select: none;
+      }
+      .maksbuttonscontainer div:first-of-type {
+        background-color: rgb(70, 70, 70);
+      }
+      .mask {
+        width: 100%;
+        aspect-ratio: 1;
+        margin-top: 10px;
+        cursor: pointer;
+        border: 2px solid white;
+        border-radius: 10%;
+        box-sizing: border-box;
+      }
+      .shapemask {
+        display: none;
+      }
+      /* fontfamilies */
+      .textcolors {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        padding: 20px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: rgb(57, 57, 57);
+        z-index: 10;
+      }
+      .textcolors div {
+        width: 20px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--color);
+        transition: 0.1s;
+        cursor: pointer;
+      }
+      .textcolors div:hover {
+        outline: 2px solid white;
+      }
+      /* gradientcolors */
+      .gradientcolorcontainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        border-radius: 20px;
+        position: sticky;
+        top: 70px;
+        outline: 1px solid white;
+        background-color: rgb(45, 45, 45);
+        z-index: 10;
+      }
+      .gradientcolors {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .gcolor {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .gcolor input {
+        border: none;
+        background-color: transparent;
+      }
+      .gradientcolorcontainer hr {
+        width: 70%;
+      }
+      .gradientcolorcontainer p {
+        line-height: 0;
+      }
+      /* glow/shadow */
+      .glowcontainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        color: white;
+        border-radius: 20px;
+        border: 1px solid white;
+        background-color: rgb(45, 45, 45);
+        padding: 10px;
+        box-sizing: border-box;
+        margin-top: 10px;
+      }
+      .glowcontainer span {
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .glowcontainer input[type="color"] {
+        border: none;
+        background-color: transparent;
+        width: 100%;
+      }
+      /*  */
+      .fontfamilies {
+        color: white;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 100px;
+        padding: 5px 0px;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      .fontfamilies:hover {
+        background-color: rgb(85, 85, 85);
+      }
+      /* animationscontainer */
+      .animations {
+        color: white;
+        margin-top: 20px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      .coloredoption {
+        background: rgb(85, 85, 85);
+      }
+      .animations:hover {
+        background: rgb(85, 85, 85);
+      }
+      /* efects */
+      .seffects {
+        color: white;
+        margin-top: 20px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      .seffects:hover {
+        background: rgb(85, 85, 85);
+      }
+      /* specialcomponents */
+      /* seelected image */
+      .selectedimagecontainer {
+        position: absolute;
+        border: 1px dashed white;
+        outline: 1px dashed black;
+        width: 300px;
+        height: auto;
+      }
+      .selectedImage {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        mask-position: center;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        -webkit-mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        font-style: normal;
+        cursor: all-scroll;
+        filter: brightness(1) contrast(1) grayscale(0) hue-rotate(0deg)
+          invert(0) saturate(1) sepia(0);
+      }
+      /* addedtext */
+      .addedtext {
+        position: absolute;
+        width: 200px;
+        height: 40px;
+        border: 1px dashed white;
+        outline: 1px dashed black;
+      }
+      .textelementinput {
+        background-color: transparent;
+        text-align: left;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        display: grid;
+        place-content: center;
+        color: rgb(0, 0, 0);
+        caret-color: rgb(125, 125, 125);
+        overflow-x: hidden;
+        font-size: 10px;
+      }
+      .textelementinput::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+      }
+      .addedtextbuttons {
+        position: absolute;
+        height: 20px;
+        aspect-ratio: 1;
+        right: -25px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .addedtextbuttons svg {
+        transform: scale(4);
+      }
+      .addedtextdeletebutton {
+        top: -25px;
+      }
+      .addedtextresizebutton {
+        bottom: -25px;
+      }
+      /* text edit menu */
+      .texteditmenu {
+        height: 30px;
+        width: 200px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        position: absolute;
+        top: -32px;
+        right: 0;
+      }
+      .hline {
+        height: 90%;
+        width: 1px;
+        background-color: black;
+      }
+      .textchild {
+        height: 90%;
+        aspect-ratio: 1;
+        border-radius: 5px;
+        display: grid;
+        place-content: center;
+        cursor: pointer;
+        color: black;
+      }
+      .textchild:hover {
+        background-color: rgba(0, 255, 0, 0.2);
+      }
+      .textcolorinput {
+        border: none;
+        background-color: transparent;
+      }
+      .textalignbuttons:first-of-type {
+        background-color: rgb(0, 255, 0);
+      }
+      /* loading */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 999;
+        place-content: center;
+        backdrop-filter: blur(10px);
+        display: none;
+      }
+      .loading div {
+        height: 200px;
+        aspect-ratio: 5/4;
+        background-image: url("Assets/uicomponents/loading1.gif");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: white;
+        border-radius: 20px;
+      }
+      .loading span {
+        display: block;
+        color: white;
+        margin: auto;
+        margin-top: 20px;
+        user-select: none;
+      }
+    </style>
+
+    <!-- mobile view -->
+    <style>
+      @media (width<450px) {
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+        html {
+          overflow: hidden;
+        }
+        body {
+          min-height: 100dvh;
+          overflow: hidden;
+        }
+        main {
+          height: calc(100dvh - 120px);
+        }
+        .preview {
+          width: unset;
+          max-width: 100%;
+          height: 100%;
+          border-radius: 10px;
+        }
+        /* toolmenumobile */
+        .toolmenu {
+          flex-direction: row;
+          height: 60px;
+          width: 100vw;
+          top: unset;
+          bottom: 0;
+          overflow-x: scroll;
+          background-color: var(--bg);
+          align-items: center;
+          gap: 20px;
+          z-index: 200;
+          padding-inline: 20px;
+          overflow-x: scroll;
+          box-sizing: border-box;
+        }
+        .toolmenu::-webkit-scrollbar {
+          height: 0;
+        }
+        .toolmenuInOutButton {
+          display: none;
+        }
+        /*  */
+        .tooloption {
+          height: 100%;
+          min-height: 60px;
+          min-width: 60px;
+          border-radius: 10px;
+          cursor: pointer;
+          background-color: transparent;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0;
+          color: white;
+          position: relative;
+        }
+        .tooloption:hover {
+          background-color: transparent;
+        }
+        .tooloption img {
+          width: 40%;
+          height: unset;
+          aspect-ratio: 1;
+          margin-left: 0;
+          margin-top: 6px;
+        }
+        .tooloption p {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          line-height: 0px;
+          font-size: 13px;
+          bottom: 6px;
+        }
+        .tooloption .eff {
+          left: 50%;
+          top: unset;
+          bottom: 0;
+          width: 20px;
+          transform: translateX(-50%);
+          height: 3px;
+        }
+        .savebutton {
+          margin-top: unset;
+        }
+        /*  */
+        .selectMenu {
+          height: calc(100dvh - 120px);
+          padding-bottom: 10px;
+          width: 200px;
+        }
+        .selectMenuInOutButton {
+          left: -50px;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          padding: 10px;
+          box-sizing: border-box;
+          clip-path: unset;
+          border: 1px solid white;
+        }
+      }
+    </style>
+    <!-- alert -->
+    <style>
+      /* alert */
+      .alert {
+        position: fixed;
+        height: 60px;
+        width: calc(100% - 20px);
+        max-width: 400px;
+        background-image: linear-gradient(135deg, grey, rgb(83, 83, 83));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 500;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 10px;
+        animation: alertshow 0.3s forwards;
+        display: none;
+      }
+      .alert img {
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+      .alert .message {
+        color: white;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .alert button {
+        height: 100%;
+        aspect-ratio: 1;
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .alert button:hover {
+        background-color: rgb(0, 170, 255);
+      }
+      .loadingline {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 20px);
+        border-radius: 5px;
+        height: 2px;
+        background-color: rgb(0, 170, 255);
+        animation: laodinglineanimation 3s linear forwards;
+      }
+      @keyframes laodinglineanimation {
+        0% {
+          width: calc(100% - 20px);
+        }
+        100% {
+          width: 0;
+        }
+      }
+      @keyframes alertshow {
+        0% {
+          top: 0;
+        }
+        100% {
+          top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <div></div>
+      <span>Saving...</span>
+    </div>
+    <div class="alert">
+      <img src="Assets/uicomponents/alert1.svg" alt="" />
+      <div class="message"></div>
+      <button onclick="hidealert()">X</button>
+      <div class="loadingline"></div>
+    </div>
+    <nav>
+      <div class="leftnav">
+        <img class="menubutton" src="Assets/uicomponents/menu.svg" alt="" />
+        <div class="logo">Online Invitation</div>
+      </div>
+      <div class="rightnav">
+        <div class="profile"></div>
+      </div>
+    </nav>
+    <div class="effectscreenview"></div>
+    <main>
+      <div class="preview"></div>
+    </main>
+    <div class="toolmenu">
+      <span class="toolmenuInOutButton" onclick="toggletoolmenuleft(this)">
+        <img src="Assets/uicomponents/arrow.svg" alt="" />
+      </span>
+      <div
+        class="tooloption"
+        onclick="togglesidemunefuctions('sidemenubackgrounds','block'),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/backgroundsvg.svg" alt="" />
+        <p>Theme</p>
+        <div class="eff"></div>
+      </div>
+      <div
+        class="tooloption imagetool"
+        onclick="togglesidemunefuctions('imagesettings','block'),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/photosvg.svg" alt="" />
+        <p>Photo</p>
+        <div class="eff"></div>
+      </div>
+      <div
+        class="tooloption texttool"
+        onclick="togglesidemunefuctions('fontfamilycontainer','block'),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/texticonsvg.svg" alt="" />
+        <p>Text</p>
+        <div class="eff"></div>
+      </div>
+      <div
+        class="tooloption"
+        onclick="togglesidemunefuctions('imagemasks','block'),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/masksvg.svg" alt="" />
+        <p>Masks</p>
+        <div class="eff"></div>
+      </div>
+      <div
+        class="tooloption"
+        onclick="togglesidemunefuctions('animationscontainer','block'),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/animation-svg.svg" alt="" />
+        <p>Animations</p>
+        <div class="eff"></div>
+      </div>
+      <div
+        class="tooloption"
+        onclick="togglesidemunefuctions('effectscontainer','block'),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/screeneff_svg.svg" alt="" />
+        <p>Effects</p>
+        <div class="eff"></div>
+      </div>
+      <div
+        class="tooloption savebutton"
+        onclick="prewiew(),leftsidemenueff(this)"
+      >
+        <img src="Assets/uicomponents/savesvg.svg" alt="" />
+        <p>Save</p>
+        <div class="eff"></div>
+      </div>
+    </div>
+    <div class="selectMenu">
+      <span class="selectMenuInOutButton" onclick="togglesidemenuright(this)"
+        ><img src="Assets/uicomponents/arrow.svg" alt=""
+      /></span>
+      <div class="sidemenubackgrounds selectMenucomp">
+        <div class="bgselectcontainer">
+          <div onclick="selectbackgroundtype(this)">All</div>
+          <div onclick="selectbackgroundtype(this)">Birthday cards</div>
+          <div onclick="selectbackgroundtype(this)">Wedding cards</div>
+          <div onclick="selectbackgroundtype(this)">Party cards</div>
+          <div onclick="selectbackgroundtype(this)">cards</div>
+          <div onclick="selectbackgroundtype(this)">Birthday cards</div>
+        </div>
+      </div>
+      <div class="imagesettings selectMenucomp">
+        <div class="selectnewimage">
+          <input type="file" name="" accept="image/*" id="imageselect" />
+          <p>Select Image</p>
+        </div>
+        <div class="replaceimage">
+          <input type="file" name="" accept="image/*" id="replaceimage" />
+          <p>Replace Image</p>
+        </div>
+        <hr />
+        <div class="moreoptionscontainer">
+          <div class="moreoptions invertup" onclick="invertimage('side')"></div>
+          <div class="moreoptions invertside" onclick="invertimage('up')"></div>
+        </div>
+        <hr />
+        <div class="imagesettingtitle">
+          <h2>Adjust</h2>
+          <button
+            onclick="setimageeffects(false),setimageeffectvaluesback(false)"
+          ></button>
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Brightness</p>
+          <div class="imagebrightnessshow">100</div>
+          <input
+            type="range"
+            id="imagebrightness"
+            min="0"
+            max="200"
+            value="100"
+          />
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Saturation</p>
+          <div class="imagesaturationshow">100</div>
+          <input
+            type="range"
+            id="imagesaturation"
+            min="0"
+            max="200"
+            value="100"
+          />
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Contrast</p>
+          <div class="imagecontrastshow">100</div>
+          <input
+            type="range"
+            id="imagecontrast"
+            min="0"
+            max="200"
+            value="100"
+          />
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Grayscale</p>
+          <div class="imagegrayscaleshow">0</div>
+          <input type="range" id="imagegrayscale" min="0" max="100" value="0" />
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Hue-rotate</p>
+          <div class="imagehuerotateshow">0°</div>
+          <input type="range" id="imagehuerotate" min="0" max="360" value="0" />
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Invert</p>
+          <div class="imageinvertshow">0</div>
+          <input type="range" id="imageinvert" min="0" max="100" value="0" />
+        </div>
+        <div class="effectsinnercontainer">
+          <p>Sepia</p>
+          <div class="imagesepiashow">0</div>
+          <input type="range" id="imagesepia" min="0" max="100" value="0" />
+        </div>
+      </div>
+      <div class="imagemasks selectMenucomp">
+        <div class="maksbuttonscontainer">
+          <div onclick="showhidemasks(this,1)">Regular</div>
+          <div onclick="showhidemasks(this,2)">Shapes</div>
+        </div>
+        <img
+          noneelem="true"
+          src="Assets/uicomponents/block.svg"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape1.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape2.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape3.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape4.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape5.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape6.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape7.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape8.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          src="Assets/masks/shapes/shape9.png"
+          alt=""
+          class="mask shapemask"
+        />
+        <img
+          noneelem="true"
+          src="Assets/uicomponents/block.svg"
+          alt=""
+          class="mask regularmask"
+        />
+        <img src="Assets/masks/mask1.png" alt="" class="mask regularmask" />
+        <img src="Assets/masks/mask2.png" alt="" class="mask regularmask" />
+      </div>
+      <div class="fontfamilycontainer selectMenucomp">
+        <div class="textcolors">
+          <div onclick="precolors('white')" style="--color: white"></div>
+          <div onclick="precolors('black')" style="--color: black"></div>
+          <div onclick="precolors('red')" style="--color: red"></div>
+          <div onclick="precolors('green')" style="--color: green"></div>
+          <div onclick="precolors('yellow')" style="--color: yellow"></div>
+        </div>
+        <div class="gradientcolorcontainer">
+          <h3>Gradient Color</h3>
+          <div class="gradientcolors">
+            <div class="gcolor gcolor1">
+              <input type="color" id="gcolor1" value="#0084FF" />
+              <p>Color1</p>
+            </div>
+            <div class="gcolor gcolor2">
+              <input type="color" id="gcolor2" value="#FF0000" />
+              <p>Color2</p>
+            </div>
+          </div>
+          <hr />
+          <input type="range" name="" id="gradientangle" min="0" max="360" />
+          <p>Angle</p>
+        </div>
+        <div class="glowcontainer">
+          <span>Glow</span>
+          <input type="color" name="" id="glowcolor" value="#FFFF00" />
+          <div class="line"></div>
+          <input
+            type="range"
+            name=""
+            id="glowvalue"
+            value="0"
+            min="0"
+            max="5"
+          />
+        </div>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Calibri'"
+        >
+          Calibri
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Gill Sans'"
+        >
+          Gill Sans
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: Courier"
+        >
+          Courier
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: sans-serif"
+        >
+          sans-serif
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: cursive"
+        >
+          cursive
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Dancing Script'"
+        >
+          Dancing Script
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Ephesis'"
+        >
+          Ephesis
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Great Vibes'"
+        >
+          Great Vibes
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Tourney'"
+        >
+          Tourney
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Tangerine'"
+        >
+          Tangerine
+        </p>
+        <p
+          class="fontfamilies"
+          onclick="changefontfamily(this)"
+          style="font-family: 'Monoton'"
+        >
+          Monoton
+        </p>
+      </div>
+      <div class="animationscontainer selectMenucomp">
+        <div class="animations coloredoption">None</div>
+        <div class="animations">Pop_out</div>
+        <div class="animations">Pop_in</div>
+        <div class="animations">Slide_left</div>
+        <div class="animations">Slide_right</div>
+        <div class="animations">Slide_top</div>
+        <div class="animations">Slide_bottom</div>
+        <div class="animations">Fade_out</div>
+      </div>
+      <div class="effectscontainer selectMenucomp">
+        <div class="seffects coloredoption">None</div>
+        <div class="seffects">Snow 1</div>
+        <div class="seffects">Balloons</div>
+        <div class="seffects">Blinking stars</div>
+        <div class="seffects">Bubbles</div>
+        <div class="seffects">Sakura</div>
+      </div>
+    </div>
+    <!-- ui -->
+    <script>
+      let previewRect = document.querySelector(".preview");
+      // flags
+      let flags = {
+        rightSideMenuFlag: true,
+        addtextmodeflag: false,
+        lefttoolmenuflag: true,
+      };
+      // alert
+      // show alert
+      let alerttimer;
+      function showalertbox(value) {
+        document.querySelector(".alert").style.display = "none";
+        setTimeout(() => {
+          document.querySelector(".alert").style.display = "flex";
+          document.querySelector(".message").innerHTML = value;
+          clearTimeout(alerttimer);
+          alerttimer = setTimeout(() => {
+            document.querySelector(".alert").style.display = "none";
+          }, 3000);
+        }, 1);
+      }
+      // hidealert
+      function hidealert() {
+        document.querySelector(".alert").style.display = "none";
+      }
+      //right menu toggle
+      function togglesidemenuright(value) {
+        if (flags.rightSideMenuFlag) {
+          document.querySelector(".selectMenu").style.transform =
+            "translate(100%)";
+          value.children[0].style.transform = "rotate(180deg)";
+          flags.rightSideMenuFlag = false;
+        } else {
+          document.querySelector(".selectMenu").style.transform =
+            "translate(0%)";
+          value.children[0].style.transform = "rotate(0deg)";
+          flags.rightSideMenuFlag = true;
+        }
+      }
+      //toggle side menu components
+      function togglesidemunefuctions(value, displaytype) {
+        document.querySelectorAll(".selectMenucomp").forEach((item) => {
+          item.style.display = "none";
+        });
+        document.querySelector("." + value).style.display = displaytype;
+        // text mode
+        if (value == "fontfamilycontainer") {
+          flags.addtextmodeflag = true;
+        } else {
+          flags.addtextmodeflag = false;
+        }
+        // opensidemenu
+        flags.rightSideMenuFlag = false;
+        togglesidemenuright(document.querySelector(".selectMenuInOutButton"));
+      }
+      // toggletoolmenuleft
+      function toggletoolmenuleft(value) {
+        if (flags.lefttoolmenuflag) {
+          document.querySelector(".toolmenu").style.transform =
+            "translate(-100%)";
+          value.children[0].style.transform = "rotate(0deg)";
+          flags.lefttoolmenuflag = false;
+        } else {
+          document.querySelector(".toolmenu").style.transform = "translate(0%)";
+          value.children[0].style.transform = "rotate(180deg)";
+          flags.lefttoolmenuflag = true;
+        }
+      }
+      // toolmenu effect
+      function leftsidemenueff(item) {
+        document.querySelectorAll(".tooloption .eff").forEach((item) => {
+          item.style.display = "none";
+        });
+        item.querySelector(".eff").style.display = "block";
+      }
+      // toggle masks
+      function showhidemasks(button, value) {
+        if (value == 1) {
+          document.querySelectorAll(".shapemask").forEach((item) => {
+            item.style.display = "none";
+          });
+          document.querySelectorAll(".regularmask").forEach((item) => {
+            item.style.display = "block ";
+          });
+        }
+        if (value == 2) {
+          document.querySelectorAll(".shapemask").forEach((item) => {
+            item.style.display = "block";
+          });
+          document.querySelectorAll(".regularmask").forEach((item) => {
+            item.style.display = "none ";
+          });
+        }
+        // mask type
+        document
+          .querySelectorAll(".maksbuttonscontainer div")
+          .forEach((item) => {
+            item.style.backgroundColor = "transparent";
+          });
+        button.style.backgroundColor = "rgb(70, 70, 70)";
+      }
+      // mobile toolmenu
+      let mobiletooloptions = document.querySelectorAll(".mobiletooloption");
+      mobiletooloptions.forEach((item, i) => {
+        item.onclick = (e) => {
+          mobiletooloptions.forEach((item, i) => {
+            item.querySelector("p").style.color = "white";
+          });
+          item.querySelector("p").style.color = "skyblue";
+        };
+      });
+      // responsivelayout
+      if (window.innerWidth <= 450) {
+        flags.rightSideMenuFlag = true;
+        togglesidemenuright(document.querySelector(".selectMenuInOutButton"));
+      }
+      // resize
+      window.onresize = () => {
+        if (window.innerWidth <= 450) {
+          document.querySelector(".toolmenu").style.transform = "translate(0)";
+        }
+      };
+    </script>
+    <!-- background -->
+    <script>
+      let numberofcards = {
+        all: 20,
+        wedding: 10,
+        birthday: 10,
+        party: 10,
+        others: 20,
+      };
+      function selectbackgroundtype(e) {
+        // remove previous backgrounds
+        document.querySelectorAll(".backgrounds").forEach((item) => {
+          item.remove();
+        });
+        //
+        if (e) {
+          if (e.innerHTML == "All") {
+            makecards(numberofcards.all, "background");
+          }
+          if (e.innerHTML == "Birthday cards") {
+            makecards(numberofcards.birthday, "birthday");
+          }
+          if (e.innerHTML == "Wedding cards") {
+            makecards(numberofcards.wedding, "wedding");
+          }
+          if (e.innerHTML == "Party cards") {
+            makecards(numberofcards.party, "party");
+          }
+        } else {
+          makecards(numberofcards.all, "background");
+        }
+      }
+      selectbackgroundtype();
+      // make cards
+      function makecards(type, name) {
+        let sidemenubackgrounds = document.querySelector(
+          ".sidemenubackgrounds"
+        );
+        for (let i = 0; i < type; i++) {
+          let element = document.createElement("img");
+          element.classList.add("backgrounds");
+          element.src = "Assets/Backgrounds/Static/" + name + (i + 1) + ".jpg";
+          element.loading = "lazy";
+          element.onclick = (e) => {
+            document.querySelector(".preview").style.backgroundImage =
+              "url(" + e.target.src + ")";
+          };
+          sidemenubackgrounds.appendChild(element);
+        }
+      }
+    </script>
+    <!-- select image and image effects -->
+    <script>
+      let selectedimage;
+      let inputimg = document.querySelector("#imageselect");
+      class Image {
+        constructor() {
+          this.canresize = false;
+          this.canmove = false;
+          this.removed = false;
+          this.imagevalues = {
+            invertup: 0,
+            invertside: 0,
+            brightness: 100,
+            saturation: 100,
+            contrast: 100,
+            grayscale: 0,
+            hue_rotate: 0,
+            invert: 0,
+            sepia: 0,
+          };
+          //
+          this.imagecontainer = document.createElement("div");
+          this.imagecontainer.classList.add("selectedimagecontainer");
+          this.imagecontainer.onclick = (e) => {
+            removeborders();
+            this.imagecontainer.style.zIndex = "10";
+            this.imagecontainer.style.border = " 1px dashed white";
+            this.imagecontainer.style.outline = " 1px dashed black";
+            //
+            this.deletebutton.style.display = "flex";
+            this.resizebutton.style.display = "flex";
+            // show masks
+            document.querySelectorAll(".selectMenucomp").forEach((item) => {
+              item.style.display = "none";
+            });
+            document.querySelector(".imagesettings").style.display = "block";
+            leftsidemenueff(document.querySelector(".imagetool"));
+            //
+            selectedimage = this;
+            // set values back
+            setimageeffectvaluesback(true);
+            //
+            e.stopPropagation();
+          };
+          //
+          this.image = document.createElement("img");
+          this.image.classList.add("selectedImage");
+          this.image.onmousedown = () => {
+            this.canmove = true;
+          };
+          this.image.addEventListener(
+            "touchstart",
+            () => {
+              this.canmove = true;
+            },
+            { passive: false }
+          );
+          this.image.addEventListener("dragstart", (e) => {
+            e.preventDefault();
+          });
+          //delete button
+          this.deletebutton = document.createElement("button");
+          this.deletebutton.classList.add(
+            "addedtextbuttons",
+            "addedtextdeletebutton"
+          );
+          this.deletebutton.innerHTML =
+            '<svg class="textsvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16 8L8 16M12 12L16 16M8 8L10 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>';
+          this.deletebutton.onclick = (e) => {
+            this.imagecontainer.remove();
+            this.removed = true;
+          };
+          //resize button
+          this.resizebutton = document.createElement("button");
+          this.resizebutton.classList.add(
+            "addedtextbuttons",
+            "addedtextresizebutton"
+          );
+          this.resizebutton.innerHTML =
+            '<svg class="textsvg" viewBox="-66.56 -66.56 645.12 645.12" xmlns="http://www.w3.org/2000/svg" fill="#000000" transform="matrix(-1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>ionicons-v5-c</title><polyline points="304 96 416 96 416 208" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline><line x1="405.77" y1="106.2" x2="111.98" y2="400.02" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><polyline points="208 416 96 416 96 304" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline></g></svg>';
+          this.resizebutton.onmousedown = () => {
+            this.canresize = true;
+          };
+          this.resizebutton.addEventListener(
+            "touchstart",
+            () => {
+              this.canresize = true;
+            },
+            { passive: false }
+          );
+          //
+          this.imagecontainer.appendChild(this.image);
+          this.imagecontainer.appendChild(this.deletebutton);
+          this.imagecontainer.appendChild(this.resizebutton);
+        }
+      }
+      // creating object of class image
+      let addedimagearray = [];
+      inputimg.onchange = (e) => {
+        let file = e.target.files[0];
+        if (file) {
+          let reader = new FileReader();
+          reader.onload = (e) => {
+            let newimage = new Image();
+            newimage.image.src = e.target.result;
+            //
+            previewRect.appendChild(newimage.imagecontainer);
+            addedimagearray.push(newimage);
+            //
+            selectedimage = newimage;
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      // replace image
+      document.querySelector("#replaceimage").onchange = (e) => {
+        if (!checkselectimage()) {
+          showalertbox("Please select an image first");
+          return;
+        }
+        let file = e.target.files[0];
+        if (file && selectedimage) {
+          let reader = new FileReader();
+          reader.onload = (e) => {
+            selectedimage.image.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      //invert images
+      function invertimage(value) {
+        if (!checkselectimage()) {
+          return;
+        }
+        if (value == "up") {
+          if (selectedimage.imagevalues.invertup == 0) {
+            selectedimage.imagevalues.invertup = 180;
+          } else {
+            selectedimage.imagevalues.invertup = 0;
+          }
+        }
+        //
+        if (value == "side") {
+          if (selectedimage.imagevalues.invertside == 0) {
+            selectedimage.imagevalues.invertside = 180;
+          } else {
+            selectedimage.imagevalues.invertside = 0;
+          }
+        }
+        //
+        selectedimage.image.style.transform =
+          "rotateX(" +
+          selectedimage.imagevalues.invertup +
+          "deg) rotateY(" +
+          selectedimage.imagevalues.invertside +
+          "deg)";
+      }
+
+      // apply image effects
+      function checkselectimage() {
+        if (selectedimage) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      // brightness
+      document.querySelector("#imagebrightness").oninput = (e) => {
+        document.querySelector(".imagebrightnessshow").innerHTML =
+          e.target.value;
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.brightness = e.target.value;
+        setimageeffects(true);
+      };
+      // saturation
+      document.querySelector("#imagesaturation").oninput = (e) => {
+        document.querySelector(".imagesaturationshow").innerHTML =
+          e.target.value;
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.saturation = e.target.value;
+        setimageeffects(true);
+      };
+      // contrast
+      document.querySelector("#imagecontrast").oninput = (e) => {
+        document.querySelector(".imagecontrastshow").innerHTML = e.target.value;
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.contrast = e.target.value;
+        setimageeffects(true);
+      };
+      // grayscale
+      document.querySelector("#imagegrayscale").oninput = (e) => {
+        document.querySelector(".imagegrayscaleshow").innerHTML =
+          e.target.value;
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.grayscale = e.target.value;
+        setimageeffects(true);
+      };
+      // imagehuerotate
+      document.querySelector("#imagehuerotate").oninput = (e) => {
+        document.querySelector(".imagehuerotateshow").innerHTML =
+          e.target.value + "°";
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.hue_rotate = e.target.value;
+        setimageeffects(true);
+      };
+      // imageinvert
+      document.querySelector("#imageinvert").oninput = (e) => {
+        document.querySelector(".imageinvertshow").innerHTML = e.target.value;
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.invert = e.target.value;
+        setimageeffects(true);
+      };
+      // imagesepia
+      document.querySelector("#imagesepia").oninput = (e) => {
+        document.querySelector(".imagesepiashow").innerHTML = e.target.value;
+        if (!checkselectimage()) {
+          return;
+        }
+        selectedimage.imagevalues.sepia = e.target.value;
+        setimageeffects(true);
+      };
+      // fucntion to set image values
+      function setimageeffects(i) {
+        if (!checkselectimage()) {
+          return;
+        }
+        // to reset values
+        if (i == false) {
+          selectedimage.imagevalues = {
+            brightness: 100,
+            saturation: 100,
+            contrast: 100,
+            grayscale: 0,
+            hue_rotate: 0,
+            invert: 0,
+            sepia: 0,
+          };
+        }
+        //
+        selectedimage.image.style.filter = ` brightness(${
+          selectedimage.imagevalues.brightness / 100
+        }) 
+          saturate(${selectedimage.imagevalues.saturation / 100}) 
+          contrast(${selectedimage.imagevalues.contrast / 100}) 
+          grayscale(${selectedimage.imagevalues.grayscale / 100})
+          hue-rotate(${selectedimage.imagevalues.hue_rotate}deg)       
+          invert(${selectedimage.imagevalues.invert / 100}) 
+          sepia(${selectedimage.imagevalues.sepia / 100})`;
+      }
+      // setvalues ui back
+      function setimageeffectvaluesback(i) {
+        document.querySelector("#imagebrightness").value = i
+          ? selectedimage.imagevalues.brightness
+          : 100;
+        document.querySelector(".imagebrightnessshow").innerHTML = i
+          ? selectedimage.imagevalues.brightness
+          : 100;
+        document.querySelector("#imagesaturation").value = i
+          ? selectedimage.imagevalues.saturation
+          : 100;
+        document.querySelector(".imagesaturationshow").innerHTML = i
+          ? selectedimage.imagevalues.saturation
+          : 100;
+        document.querySelector("#imagecontrast").value = i
+          ? selectedimage.imagevalues.contrast
+          : 100;
+        document.querySelector(".imagecontrastshow").innerHTML = i
+          ? selectedimage.imagevalues.contrast
+          : 100;
+        document.querySelector("#imagegrayscale").value = i
+          ? selectedimage.imagevalues.grayscale
+          : 0;
+        document.querySelector(".imagegrayscaleshow").innerHTML = i
+          ? selectedimage.imagevalues.grayscale
+          : 0;
+        document.querySelector("#imagehuerotate").value = i
+          ? selectedimage.imagevalues.hue_rotate
+          : 0;
+        document.querySelector(".imagehuerotateshow").innerHTML = i
+          ? selectedimage.imagevalues.hue_rotate
+          : 0;
+        document.querySelector("#imageinvert").value = i
+          ? selectedimage.imagevalues.invert
+          : 0;
+        document.querySelector(".imageinvertshow").innerHTML = i
+          ? selectedimage.imagevalues.invert
+          : 0;
+        document.querySelector("#imagesepia").value = i
+          ? selectedimage.imagevalues.sepia
+          : 0;
+        document.querySelector(".imagesepiashow").innerHTML = i
+          ? selectedimage.imagevalues.sepia
+          : 0;
+      }
+      // <---apply masks --->
+      let allmasks = document.querySelectorAll(".mask");
+      allmasks.forEach((mask) => {
+        mask.onclick = () => {
+          if (selectedimage) {
+            if (mask.getAttribute("noneelem")) {
+              selectedimage.image.style.maskImage = `unset`;
+              selectedimage.image.style.webkitMaskImage = `unset`;
+            } else {
+              selectedimage.image.style.maskImage = `url(${mask.src})`;
+              selectedimage.image.style.webkitMaskImage = `url(${mask.src})`;
+            }
+          } else {
+            showalertbox("Please select a Photo first");
+          }
+        };
+      });
+    </script>
+    <!-- text -->
+    <script>
+      let canadd = true;
+      let selectedtext;
+      // class =====>>>>
+      class text {
+        constructor() {
+          this.canresize = false;
+          this.canmove = false;
+          this.removed = false;
+          this.gcolor1 = "#0084FF";
+          this.gcolor2 = "#FF0000";
+          this.gangle = "90";
+          this.glow = {
+            color: "#FFFF00",
+            value: 0,
+          };
+          //main text element
+          this.element = document.createElement("div");
+          this.element.classList.add("addedtext");
+          this.element.onclick = (e) => {
+            removeborders();
+            this.element.style.zIndex = "10";
+            this.element.style.border = " 1px dashed white";
+            this.element.style.outline = " 1px dashed black";
+            //
+            this.deletebutton.style.display = "flex";
+            this.resizebutton.style.display = "flex";
+            this.texteditmenu.style.display = "flex";
+            //
+            selectedtext = this;
+            canadd = false;
+            // show side text menu
+            document.querySelectorAll(".selectMenucomp").forEach((item) => {
+              item.style.display = "none";
+            });
+            document.querySelector(".fontfamilycontainer").style.display =
+              "block";
+            leftsidemenueff(document.querySelector(".texttool"));
+            // gradient color set
+            document.querySelector("#gcolor1").value = this.gcolor1;
+            document.querySelector("#gcolor2").value = this.gcolor2;
+            document.querySelector("#gradientangle").value = this.gangle;
+            // set glow values
+            document.querySelector("#glowvalue").value = this.glow.value;
+            document.querySelector("#glowcolor").value = this.glow.color;
+            e.stopPropagation();
+          };
+          //input element
+          this.inputelement = document.createElement("div");
+          this.inputelement.classList.add("textelementinput");
+          this.inputelement.contentEditable = "true";
+          this.inputelement.onmousedown = () => {
+            this.canmove = true;
+            this.inputelement.style.cursor = "all-scroll";
+          };
+          this.inputelement.addEventListener(
+            "touchstart",
+            () => {
+              this.canmove = true;
+            },
+            { passive: false }
+          );
+          this.inputelement.onmouseup = () => {
+            this.inputelement.style.cursor = "text";
+          };
+          this.inputelement.onpaste = handlePaste;
+          //delete button
+          this.deletebutton = document.createElement("button");
+          this.deletebutton.classList.add(
+            "addedtextbuttons",
+            "addedtextdeletebutton"
+          );
+          this.deletebutton.innerHTML =
+            '<svg class="textsvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16 8L8 16M12 12L16 16M8 8L10 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>';
+          this.deletebutton.onclick = (e) => {
+            this.element.remove();
+            this.removed = true;
+          };
+          //resize button
+          this.resizebutton = document.createElement("button");
+          this.resizebutton.classList.add(
+            "addedtextbuttons",
+            "addedtextresizebutton"
+          );
+          this.resizebutton.innerHTML =
+            '<svg class="textsvg" viewBox="-66.56 -66.56 645.12 645.12" xmlns="http://www.w3.org/2000/svg" fill="#000000" transform="matrix(-1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>ionicons-v5-c</title><polyline points="304 96 416 96 416 208" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline><line x1="405.77" y1="106.2" x2="111.98" y2="400.02" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><polyline points="208 416 96 416 96 304" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline></g></svg>';
+          this.resizebutton.onmousedown = () => {
+            this.canresize = true;
+          };
+          this.resizebutton.addEventListener(
+            "touchstart",
+            () => {
+              this.canresize = true;
+            },
+            { passive: false }
+          );
+          //toolmenu
+          this.texteditmenu = document.createElement("div");
+          this.texteditmenu.classList.add("texteditmenu");
+          //
+          this.colorinput = document.createElement("input");
+          this.colorinput.classList.add("textcolorinput");
+          this.colorinput.type = "color";
+          this.colorinput.oninput = (e) => {
+            this.inputelement.style.color = e.target.value;
+          };
+          this.texteditmenu.appendChild(this.colorinput);
+          //
+          this.hline = document.createElement("div");
+          this.hline.classList.add("hline");
+          this.texteditmenu.appendChild(this.hline);
+          //
+          this.italicflag = true;
+          this.italic = document.createElement("i");
+          this.italic.classList.add("textchild", "boldoritalic");
+          this.italic.innerText = "I";
+          this.italic.onclick = () => {
+            this.inputelement.style.fontStyle = "italic";
+          };
+          this.italic.onclick = () => {
+            if (this.italicflag) {
+              this.inputelement.style.fontStyle = "italic";
+              this.italic.style.backgroundColor = "rgb(0, 255, 0)";
+              this.italicflag = false;
+            } else {
+              this.inputelement.style.fontStyle = "normal";
+              this.italic.style.backgroundColor = "white";
+              this.italicflag = true;
+            }
+          };
+          this.texteditmenu.appendChild(this.italic);
+          //
+          this.boldflag = true;
+          this.bold = document.createElement("b");
+          this.bold.classList.add("textchild", "boldoritalic");
+          this.bold.innerText = "B";
+          this.bold.onclick = () => {
+            if (this.boldflag) {
+              this.inputelement.style.fontWeight = "900";
+              this.bold.style.backgroundColor = "rgb(0, 255, 0)";
+              this.boldflag = false;
+            } else {
+              this.inputelement.style.fontWeight = "400";
+              this.bold.style.backgroundColor = "white";
+              this.boldflag = true;
+            }
+          };
+          this.texteditmenu.appendChild(this.bold);
+          //
+          this.hline = document.createElement("div");
+          this.hline.classList.add("hline");
+          this.texteditmenu.appendChild(this.hline);
+          //
+          this.alingleft = document.createElement("img");
+          this.alingleft.src = "Assets/uicomponents/text align left.svg";
+          this.alingleft.classList.add("textalignbuttons", "textchild");
+          this.alingleft.onclick = () => {
+            this.inputelement.style.textAlign = "left";
+            this.textalign(0);
+          };
+          this.texteditmenu.appendChild(this.alingleft);
+          //
+          this.aligncenter = document.createElement("img");
+          this.aligncenter.src = "Assets/uicomponents/text align center.svg";
+          this.aligncenter.classList.add("textalignbuttons", "textchild");
+          this.aligncenter.onclick = () => {
+            this.inputelement.style.textAlign = "center";
+            this.textalign(1);
+          };
+          this.texteditmenu.appendChild(this.aligncenter);
+          //
+          this.alingright = document.createElement("img");
+          this.alingright.src = "Assets/uicomponents/text align right.svg";
+          this.alingright.classList.add("textalignbuttons", "textchild");
+          this.alingright.onclick = () => {
+            this.inputelement.style.textAlign = "right";
+            this.textalign(2);
+          };
+          this.texteditmenu.appendChild(this.alingright);
+          // final append
+          this.element.appendChild(this.inputelement);
+          this.element.appendChild(this.deletebutton);
+          this.element.appendChild(this.resizebutton);
+          this.element.appendChild(this.texteditmenu);
+          // functions
+          // align functon
+          this.textalign = function (value) {
+            this.alingleft.style.backgroundColor = "white";
+            this.aligncenter.style.backgroundColor = "white";
+            this.alingright.style.backgroundColor = "white";
+            if (value == 0) {
+              this.alingleft.style.backgroundColor = "rgb(0, 255, 0)";
+            }
+            if (value == 1) {
+              this.aligncenter.style.backgroundColor = "rgb(0, 255, 0)";
+            }
+            if (value == 2) {
+              this.alingright.style.backgroundColor = "rgb(0, 255, 0)";
+            }
+          };
+        }
+      }
+      // creating object of class text
+      let addedtextarray = [];
+      previewRect.onclick = (e) => {
+        removeborders();
+        if (
+          e.target.classList.contains("preview") &&
+          flags.addtextmodeflag &&
+          canadd
+        ) {
+          let textelement = new text();
+          textelement.element.style.left =
+            e.pageX - previewRect.offsetLeft + "px";
+          textelement.element.style.top =
+            e.pageY - previewRect.offsetTop + "px";
+          previewRect.appendChild(textelement.element);
+          addedtextarray.push(textelement);
+          textelement.inputelement.focus();
+          //
+          selectedtext = textelement;
+        }
+        canadd = true;
+      };
+
+      // events
+      document.body.onmousemove = (e) => {
+        addedtextarray.forEach((item) => {
+          // text move
+          if (item.canmove) {
+            item.element.style.left =
+              e.pageX -
+              previewRect.offsetLeft -
+              item.element.clientWidth / 2 +
+              "px";
+            item.element.style.top =
+              e.pageY -
+              previewRect.offsetTop -
+              item.element.clientHeight / 2 +
+              "px";
+          }
+          // text resize
+          if (item.canresize) {
+            item.element.style.width =
+              e.pageX -
+              (item.element.offsetLeft + previewRect.offsetLeft) -
+              20 +
+              "px";
+            item.element.style.height =
+              e.pageY -
+              (item.element.offsetTop + previewRect.offsetTop) -
+              20 +
+              "px";
+            item.inputelement.style.fontSize =
+              (e.pageY - (item.element.offsetTop + previewRect.offsetTop)) / 4 +
+              "px";
+          }
+        });
+        // image events
+        addedimagearray.forEach((item) => {
+          // image move
+          if (item.canmove) {
+            item.imagecontainer.style.left =
+              e.pageX -
+              previewRect.offsetLeft -
+              item.imagecontainer.clientWidth / 2 +
+              "px";
+            item.imagecontainer.style.top =
+              e.pageY -
+              previewRect.offsetTop -
+              item.imagecontainer.clientHeight / 2 +
+              "px";
+          }
+          // image resize
+          if (item.canresize) {
+            item.imagecontainer.style.width =
+              e.pageX -
+              (item.imagecontainer.offsetLeft + previewRect.offsetLeft) -
+              20 +
+              "px";
+            item.imagecontainer.style.height =
+              e.pageY -
+              (item.imagecontainer.offsetTop + previewRect.offsetTop) -
+              20 +
+              "px";
+          }
+        });
+      };
+      document.body.onmouseup = (e) => {
+        //text events
+        addedtextarray.forEach((item) => {
+          item.canresize = false;
+          item.canmove = false;
+        });
+        // image events
+        addedimagearray.forEach((item) => {
+          item.canresize = false;
+          item.canmove = false;
+        });
+      };
+      //touch events
+      document.body.addEventListener(
+        "touchmove",
+        (e) => {
+          // text event
+          addedtextarray.forEach((item) => {
+            // text move
+            if (item.canmove) {
+              e.preventDefault();
+              item.element.style.left =
+                e.touches[0].pageX -
+                previewRect.offsetLeft -
+                item.element.clientWidth / 2 +
+                "px";
+              item.element.style.top =
+                e.touches[0].pageY -
+                previewRect.offsetTop -
+                item.element.clientHeight / 2 +
+                "px";
+            }
+            // text resize
+            if (item.canresize) {
+              e.preventDefault();
+              item.element.style.width =
+                e.touches[0].pageX -
+                (item.element.offsetLeft + previewRect.offsetLeft) -
+                20 +
+                "px";
+              item.element.style.height =
+                e.touches[0].pageY -
+                (item.element.offsetTop + previewRect.offsetTop) -
+                20 +
+                "px";
+              item.inputelement.style.fontSize =
+                (e.touches[0].pageY -
+                  (item.element.offsetTop + previewRect.offsetTop)) /
+                  4 +
+                "px";
+            }
+          });
+          // image events
+          addedimagearray.forEach((item) => {
+            // image move
+            if (item.canmove) {
+              e.preventDefault();
+              item.imagecontainer.style.left =
+                e.touches[0].pageX -
+                previewRect.offsetLeft -
+                item.imagecontainer.clientWidth / 2 +
+                "px";
+              item.imagecontainer.style.top =
+                e.touches[0].pageY -
+                previewRect.offsetTop -
+                item.imagecontainer.clientHeight / 2 +
+                "px";
+            }
+            // image resize
+            if (item.canresize) {
+              e.preventDefault();
+              item.imagecontainer.style.width =
+                e.touches[0].pageX -
+                (item.imagecontainer.offsetLeft + previewRect.offsetLeft) -
+                20 +
+                "px";
+              item.imagecontainer.style.height =
+                e.touches[0].pageY -
+                (item.imagecontainer.offsetTop + previewRect.offsetTop) -
+                20 +
+                "px";
+            }
+          });
+        },
+        { passive: false }
+      );
+      // touch end
+      document.onpointerup = () => {
+        // text event
+        addedtextarray.forEach((item) => {
+          item.canresize = false;
+          item.canmove = false;
+        });
+        // image events
+        addedimagearray.forEach((item) => {
+          item.canresize = false;
+          item.canmove = false;
+        });
+      };
+      // remove all borders
+      function removeborders() {
+        // removing text borders
+        addedtextarray.forEach((item) => {
+          item.element.style.zIndex = 1;
+          item.element.style.border = " none";
+          item.element.style.outline = " none";
+          //
+          item.deletebutton.style.display = "none";
+          item.resizebutton.style.display = "none";
+          item.texteditmenu.style.display = "none";
+        });
+        // removing images borders
+        addedimagearray.forEach((item) => {
+          item.imagecontainer.style.zIndex = 1;
+          item.imagecontainer.style.border = " none";
+          item.imagecontainer.style.outline = " none";
+          //
+          item.deletebutton.style.display = "none";
+          item.resizebutton.style.display = "none";
+        });
+      }
+      // change font family
+      function changefontfamily(value) {
+        if (selectedtext) {
+          selectedtext.inputelement.style.fontFamily = value.innerText;
+        }
+      }
+
+      // fix pasted text
+      function handlePaste(event) {
+        event.preventDefault();
+        var clipboardData = event.clipboardData || window.clipboardData;
+        var pastedText = clipboardData.getData("text/plain");
+        var modifiedText = removeFontStyles(pastedText);
+        document.execCommand("insertText", false, modifiedText);
+      }
+      function removeFontStyles(text) {
+        var modifiedText = text.replace(/font-family:[^;]*;/gi, "");
+        modifiedText = modifiedText.replace(/font-size:[^;]*;/gi, "");
+        return modifiedText;
+      }
+
+      // predefined colors
+      function precolors(value) {
+        if (selectedtext) {
+          selectedtext.inputelement.style.color = value;
+        }
+      }
+      // gradient colors
+      document.querySelector("#gcolor1").oninput = (e) => {
+        if (selectedtext) {
+          selectedtext.gcolor1 = e.target.value;
+          gradienttext(
+            selectedtext.gcolor1,
+            selectedtext.gcolor2,
+            selectedtext.gangle
+          );
+        }
+      };
+      document.querySelector("#gcolor2").oninput = (e) => {
+        if (selectedtext) {
+          selectedtext.gcolor2 = e.target.value;
+          gradienttext(
+            selectedtext.gcolor1,
+            selectedtext.gcolor2,
+            selectedtext.gangle
+          );
+        }
+      };
+      document.querySelector("#gradientangle").oninput = (e) => {
+        if (selectedtext) {
+          selectedtext.gangle = e.target.value;
+          gradienttext(
+            selectedtext.gcolor1,
+            selectedtext.gcolor2,
+            selectedtext.gangle
+          );
+        }
+      };
+      //
+      function gradienttext(color1, color2, angle) {
+        if (selectedtext) {
+          selectedtext.inputelement.style.backgroundImage =
+            " linear-gradient(" + angle + "deg," + color1 + "," + color2 + ")";
+          selectedtext.inputelement.style.color = "transparent";
+          selectedtext.inputelement.style.backgroundClip = "text";
+          selectedtext.inputelement.style.webkitBackgroundClip = "text";
+        }
+      }
+      // glow
+      document.querySelector("#glowvalue").oninput = (e) => {
+        if (selectedtext) {
+          selectedtext.glow.value = e.target.value;
+          changeglow();
+        }
+      };
+      //
+      document.querySelector("#glowcolor").oninput = (e) => {
+        if (selectedtext) {
+          selectedtext.glow.color = e.target.value;
+          changeglow();
+        }
+      };
+      //
+      function changeglow() {
+        if (selectedtext.glow.value == 0) {
+          selectedtext.inputelement.style.textShadow = "none";
+        } else {
+          selectedtext.inputelement.style.textShadow =
+            "0 0 " +
+            selectedtext.glow.value * 3 * 1 +
+            "px " +
+            selectedtext.glow.color +
+            " ,0 0 " +
+            selectedtext.glow.value * 3 * 1.5 +
+            "px " +
+            selectedtext.glow.color +
+            " , 0 0 " +
+            selectedtext.glow.value * 3 * 2 +
+            "px " +
+            selectedtext.glow.color;
+        }
+      }
+    </script>
+    <!-- animation effects -->
+    <style>
+      @keyframes Pop_out {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes Pop_in {
+        0% {
+          transform: scale(5);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes Slide_left {
+        0% {
+          transform: translateX(50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0px);
+          opacity: 1;
+        }
+      }
+      @keyframes Slide_right {
+        0% {
+          transform: translateX(-50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0px);
+          opacity: 1;
+        }
+      }
+      @keyframes Slide_top {
+        0% {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+      @keyframes Slide_bottom {
+        0% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+      @keyframes Fade_out {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+    <script>
+      let animeff = "none";
+      document.querySelectorAll(".animations").forEach((item) => {
+        item.onclick = (e) => {
+          previewRect.childNodes.forEach((elem, i) => {
+            elem.style.animation = "none";
+          });
+          // change color of button
+          document.querySelectorAll(".animations").forEach((item) => {
+            item.classList.remove("coloredoption");
+          });
+          item.classList.add("coloredoption");
+          //
+          setTimeout(() => {
+            previewRect.childNodes.forEach((elem, i) => {
+              elem.style.animation =
+                e.target.innerHTML + " 0.5s " + i * 0.1 + "s forwards";
+              animeff = e.target.innerHTML;
+            });
+          }, 1);
+        };
+      });
+    </script>
+    <!-- screen effects -->
+    <style>
+      .effectscreenview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        pointer-events: none;
+        z-index: 60;
+        overflow: hidden;
+      }
+      /* snow1 */
+      .snowflake {
+        position: absolute;
+        height: 20px;
+        aspect-ratio: 1;
+        background-image: radial-gradient(white 0 10%, transparent 60% 100%);
+        border-radius: 50%;
+      }
+      @keyframes fall1 {
+        0% {
+          transform: translateY(-10vh);
+        }
+        100% {
+          transform: translateY(100vh);
+        }
+      }
+      @keyframes fall2 {
+        0% {
+          transform: translateY(-10vh);
+        }
+        100% {
+          transform: translateY(100vh) translateX(300px);
+        }
+      }
+      @keyframes fall3 {
+        0% {
+          transform: translateY(-10vh);
+        }
+        100% {
+          transform: translateY(100vh) translateX(-100px);
+        }
+      }
+      @keyframes fall4 {
+        0% {
+          transform: translateY(-10vh);
+        }
+        100% {
+          transform: translateY(100vh) translateX(100px);
+        }
+      }
+      @keyframes fall5 {
+        0% {
+          transform: translateY(-10vh);
+        }
+        100% {
+          transform: translateY(100vh) translateX(200px);
+        }
+      }
+      /* balloons */
+      .balloon {
+        position: absolute;
+        width: 50px;
+        aspect-ratio: 3/5;
+        background-image: url("Assets/screenoverlays/balloons.gif");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      /* stars */
+      .stars {
+        position: absolute;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-image: url(Assets/screenoverlays/starpng.png);
+        background-size: contain;
+        background-position: center;
+        animation: shine 0.6s infinite alternate ease-in-out;
+      }
+      @keyframes shine {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      /* bubbles1 */
+      .bubble {
+        position: absolute;
+        aspect-ratio: 1;
+        background-image: url(Assets/screenoverlays/bubble.png);
+        background-size: contain;
+        background-position: center;
+      }
+      @keyframes moveup {
+        0% {
+          transform: translateY(120vh);
+        }
+        100% {
+          transform: scale(-20vh);
+        }
+      }
+      /* sakura1 */
+      .sakuracontainer {
+        height: 50px;
+        aspect-ratio: 1;
+        position: absolute;
+      }
+      .sakura {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-image: url(Assets/screenoverlays/sakura1.png);
+        background-position: center;
+        background-size: contain;
+        animation: skew1 2s ease-in-out alternate infinite;
+        transform-origin: 50% 0%;
+      }
+      @keyframes skew1 {
+        0% {
+          transform: rotateX(70deg) rotateY(0deg) rotateZ(0deg);
+        }
+        100% {
+          transform: rotateX(-70deg) rotateY(0deg) rotateZ(-115deg);
+        }
+      }
+    </style>
+    <script>
+      let timer;
+      let timeout;
+      let seffectnumber = 0;
+      let seffects = document.querySelectorAll(".seffects");
+      seffects.forEach((effect, i) => {
+        effect.onclick = (e) => {
+          seffectnumber = i;
+          // change color of button
+          document.querySelectorAll(".seffects").forEach((item) => {
+            item.classList.remove("coloredoption");
+          });
+          effect.classList.add("coloredoption");
+          //
+          document.querySelector(".effectscreenview").innerHTML = "";
+          //
+          clearInterval(timer);
+          clearTimeout(timeout);
+          // creating loop
+          seffectloop(i);
+        };
+      });
+      // seffect loop function
+      function seffectloop(i) {
+        // snow
+        if (i == 1) {
+          let numberOfelements = 100;
+          timer = setInterval(() => {
+            seffectcreatorfunction(i);
+          }, (15 / numberOfelements) * 1000);
+          timeout = setTimeout(() => {
+            clearTimeout(timer);
+          }, 15000);
+        }
+        // balloon || bubbles
+        if (i == 2 || i == 4) {
+          let numberOfelements = 10;
+          timer = setInterval(() => {
+            seffectcreatorfunction(i);
+          }, (15 / numberOfelements) * 1000);
+          timeout = setTimeout(() => {
+            clearTimeout(timer);
+          }, 15000);
+        }
+        // star
+        if (i == 3) {
+          let numberOfelements;
+          if (window.innerWidth < 450) {
+            numberOfelements = 50;
+          } else {
+            numberOfelements = 100;
+          }
+          timer = setInterval(() => {
+            seffectcreatorfunction(i);
+          }, (15 / numberOfelements) * 1000);
+          timeout = setTimeout(() => {
+            clearTimeout(timer);
+          }, 15000);
+        }
+        // sakura
+        if (i == 5) {
+          let numberOfelements;
+          numberOfelements = 50;
+          timer = setInterval(() => {
+            seffectcreatorfunction(i);
+          }, (15 / numberOfelements) * 1000);
+          timeout = setTimeout(() => {
+            clearTimeout(timer);
+          }, 15000);
+        }
+      }
+      // seffect creator fucntion
+      function seffectcreatorfunction(value) {
+        const element = document.createElement("div");
+        if (value == 1) {
+          element.className = "snowflake";
+          const startLeft = Math.random() * window.innerWidth;
+          const startAnimationDuration = Math.random() * 5 + 5;
+          element.style.animation =
+            "fall" +
+            Math.floor(Math.random() * 4 + 1) +
+            " " +
+            startAnimationDuration +
+            "s linear infinite";
+          element.style.opacity = Math.random();
+          element.style.height = Math.random() * 15 + 5 + "px";
+          element.style.left = `${startLeft}px`;
+        }
+        // balloons
+        if (value == 2) {
+          element.className = "balloon";
+          element.style.width = Math.random() * 50 + 40 + "px";
+          element.style.left = Math.random() * (window.innerWidth - 100) + "px";
+          element.style.animation =
+            "moveup " + (Math.random() * 4 + 4) + "s infinite ease-in";
+          element.style.filter = "hue-rotate(" + Math.random() * 360 + "deg)";
+        }
+        if (value == 3) {
+          element.className = "stars";
+          element.style.height = Math.random() * 60 + 20 + "px";
+          element.style.left = Math.random() * window.innerWidth + "px";
+          element.style.top = Math.random() * window.innerHeight + "px";
+        }
+        if (value == 4) {
+          element.className = "bubble";
+          element.style.height = Math.random() * 50 + 30 + "px";
+          element.style.left = Math.random() * (window.innerWidth - 100) + "px";
+          element.style.animation =
+            "moveup " + (Math.random() * 5 + 4) + "s infinite ease-in";
+        }
+        if (value == 5) {
+          element.className = "sakuracontainer";
+          element.innerHTML = " <div class='sakura'></div>";
+          element.style.animation =
+            "fall" +
+            Math.floor(Math.random() * 4 + 1) +
+            " " +
+            (Math.random() * 5 + 7) +
+            "s ease-in-out infinite";
+          element.style.opacity = Math.random() * 0.7 + 0.3;
+          element.style.height = Math.random() * 15 + 10 + "px";
+          element.style.left = Math.random() * window.innerWidth + "px";
+        }
+        //
+        document.querySelector(".effectscreenview").appendChild(element);
+      }
+    </script>
+    <!-- receive data -->
+    <script>
+      let link = new URL(location.href);
+      if (link.searchParams.get("id")) {
+        fetch("/previewdata?id=:" + link.searchParams.get("id"))
+          .then((res) => res.json())
+          .then((data) => {
+            previewRect.style.backgroundImage =
+              data[0].cardbackground == ""
+                ? "url(./Assets/Backgrounds/Static/background1.jpg)"
+                : data[0].cardbackground;
+            animeff = data[0].animation;
+            // setimage
+            data[0].images.forEach((item) => {
+              let newimage = new Image();
+              newimage.image.src = item.image;
+              newimage.imagecontainer.style.width =
+                "calc(" + (item.width / data[0].cardwidth) * 100 + "% + 4px)";
+              newimage.imagecontainer.style.height =
+                "calc(" + (item.height / data[0].cardheight) * 100 + "% + 4px)";
+              newimage.imagecontainer.style.left =
+                (item.left / data[0].cardwidth) * 100 + "%";
+              newimage.imagecontainer.style.top =
+                (item.top / data[0].cardheight) * 100 + "%";
+              newimage.image.style.maskImage = item.mask;
+              newimage.image.style.webkitMaskImage = item.mask;
+              //
+              // imagevalues
+              newimage.image.style.filter = ` brightness(${
+                item.imagevalues.brightness / 100
+              }) 
+              saturate(${item.imagevalues.saturation / 100}) 
+              contrast(${item.imagevalues.contrast / 100}) 
+              grayscale(${item.imagevalues.grayscale / 100})
+              hue-rotate(${item.imagevalues.hue_rotate}deg)       
+              invert(${item.imagevalues.invert / 100}) 
+              sepia(${item.imagevalues.sepia / 100})`;
+              //
+              newimage.image.style.transform =
+                "rotateX(" +
+                item.imagevalues.invertup +
+                "deg) rotateY(" +
+                item.imagevalues.invertside +
+                "deg)";
+              //set values
+              newimage.imagevalues = {
+                invertup: item.imagevalues.invertup,
+                invertside: item.imagevalues.invertside,
+                brightness: item.imagevalues.brightness,
+                saturation: item.imagevalues.saturation,
+                contrast: item.imagevalues.contrast,
+                grayscale: item.imagevalues.grayscale,
+                hue_rotate: item.imagevalues.hue_rotate,
+                invert: item.imagevalues.invert,
+                sepia: item.imagevalues.sepia,
+              };
+              //
+              previewRect.appendChild(newimage.imagecontainer);
+              addedimagearray.push(newimage);
+            });
+            // settext
+            data[0].texts.forEach((item) => {
+              let textelement = new text();
+              textelement.inputelement.innerText = item.innertext;
+              textelement.element.style.width =
+                (item.width / data[0].cardwidth) * 100 + "%";
+              textelement.element.style.height =
+                (item.height / data[0].cardheight) * 100 + "%";
+              textelement.element.style.left =
+                (item.left / data[0].cardwidth) * 100 + "%";
+              textelement.element.style.top =
+                (item.top / data[0].cardheight) * 100 + "%";
+              // gradient colors
+              if (item.color == "transparent") {
+                textelement.inputelement.style.backgroundImage =
+                  " linear-gradient(" +
+                  item.gangle +
+                  "deg," +
+                  item.gcolor1 +
+                  "," +
+                  item.gcolor2 +
+                  ")";
+                textelement.inputelement.style.color = "transparent";
+                textelement.inputelement.style.backgroundClip = "text";
+                textelement.inputelement.style.webkitBackgroundClip = "text";
+              } else {
+                textelement.inputelement.style.color =
+                  item.color == "" ? "black" : item.color;
+              }
+              //
+              textelement.inputelement.style.fontFamily =
+                item.fontFamily == "" ? "Calibri" : item.fontFamily;
+              textelement.inputelement.style.fontStyle =
+                item.fontStyle == "" ? "normal" : item.fontStyle;
+              textelement.inputelement.style.fontWeight =
+                item.fontWeight == "" ? "400" : item.fontWeight;
+              textelement.inputelement.style.textAlign =
+                item.textAlign == "" ? "left" : item.textAlign;
+              // glow
+              if (item.glowvalues.value == 0) {
+                textelement.inputelement.style.textShadow = "none";
+              } else {
+                textelement.inputelement.style.textShadow =
+                  "0 0 " +
+                  item.glowvalues.value * 3 * 1 +
+                  "px " +
+                  item.glowvalues.color +
+                  " ,0 0 " +
+                  item.glowvalues.value * 3 * 1.5 +
+                  "px " +
+                  item.glowvalues.color +
+                  " , 0 0 " +
+                  item.glowvalues.value * 3 * 2 +
+                  "px " +
+                  item.glowvalues.color;
+              }
+              // set values
+              textelement.gcolor1 = item.gcolor1;
+              textelement.gcolor2 = item.gcolor2;
+              textelement.gangle = item.gangle;
+              textelement.glow = {
+                color: item.glowvalues.color,
+                value: item.glowvalues.value,
+              };
+              previewRect.appendChild(textelement.element);
+              addedtextarray.push(textelement);
+            });
+            fontresize();
+            // screen effects
+            seffectnumber = data[0].seffectnumber;
+            seffectloop(data[0].seffectnumber);
+            removeborders();
+            //
+            setTimeout(() => {
+              document.querySelector(".loading").style.display = "none";
+              // animation effects
+              previewRect.childNodes.forEach((elem, i) => {
+                elem.style.animation =
+                  data[0].animation + " 0.5s " + i * 0.1 + "s forwards";
+              });
+            }, 2500);
+          })
+          .catch((err) => {
+            document.querySelector(".loading").style.display = "none";
+            showalertbox("Unable to preview");
+          });
+        // font resize
+        function fontresize() {
+          document.querySelectorAll(".textelementinput").forEach((item) => {
+            item.style.fontSize = item.offsetHeight / 4 + "px";
+          });
+        }
+      }
+    </script>
+    <!-- preview and data share script -->
+    <script>
+      function prewiew() {
+        let data = {
+          cardwidth: previewRect.offsetWidth,
+          cardheight: previewRect.offsetHeight,
+          cardbackground: previewRect.style.backgroundImage,
+          texts: [],
+          images: [],
+          animation: animeff,
+          seffectnumber: seffectnumber,
+        };
+        // text data
+        addedtextarray.forEach((item) => {
+          if (item.inputelement.innerText != "" && item.removed == false) {
+            let textdata = {};
+            textdata.left = item.element.offsetLeft;
+            textdata.top = item.element.offsetTop;
+            textdata.width = item.element.offsetWidth;
+            textdata.height = item.element.offsetHeight;
+            textdata.innertext = item.inputelement.innerText;
+            textdata.fontFamily = item.inputelement.style.fontFamily;
+            textdata.fontSize = item.inputelement.style.fontSize;
+            textdata.color = item.inputelement.style.color;
+            textdata.fontStyle = item.inputelement.style.fontStyle;
+            textdata.fontWeight = item.inputelement.style.fontWeight;
+            textdata.textAlign = item.inputelement.style.textAlign;
+            textdata.gcolor1 = item.gcolor1;
+            textdata.gcolor2 = item.gcolor2;
+            textdata.gangle = item.gangle;
+            textdata.glowvalues = item.glow;
+            data.texts.push(textdata);
+          }
+        });
+        // image data
+        addedimagearray.forEach((item) => {
+          if (item.imagecontainer.offsetHeight != 0 && item.removed == false) {
+            let imagedata = {};
+            imagedata.left = item.imagecontainer.offsetLeft;
+            imagedata.top = item.imagecontainer.offsetTop;
+            imagedata.width = item.imagecontainer.offsetWidth;
+            imagedata.height = item.imagecontainer.offsetHeight;
+            imagedata.image = item.image.src;
+            imagedata.mask = item.image.style.maskImage;
+            imagedata.imagevalues = item.imagevalues;
+            data.images.push(imagedata);
+          }
+        });
+        // send data
+        document.querySelector(".loading").style.display = "grid";
+        fetch("/savecard", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setTimeout(() => {
+              document.querySelector(".loading").style.display = "none";
+              window.open("/preview.html?id=" + data.id);
+            }, 2500);
+          })
+          .catch((err) => {
+            document.querySelector(".loading").style.display = "none";
+            showalertbox("Unable to save");
+          });
+      }
+    </script>
+  </body>
+</html>

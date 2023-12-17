@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Ephesis&family=Great+Vibes&family=Monoton&family=Poppins:ital,wght@1,200&family=Rubik:wght@300&family=Satisfy&family=Tangerine&family=Tourney:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        margin: 0;
+        --white: white;
+        --bg: rgb(47, 47, 47);
+        --theme: rgb(0, 170, 255);
+        margin-top: 50px;
+        background-color: rgb(186, 186, 186);
+      }
+      body::-webkit-scrollbar {
+        width: 0;
+      }
+      nav {
+        height: 50px;
+        width: 100vw;
+        background-color: #131921;
+        display: flex;
+        align-items: center;
+        padding-inline: 10px;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        z-index: 100;
+      }
+      .leftnav,
+      .rightnav {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .menubutton {
+        height: 40px;
+        aspect-ratio: 1;
+        cursor: pointer;
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 50%;
+      }
+      .menubutton:hover {
+        background-color: rgb(85, 85, 85);
+      }
+      .logo {
+        margin-bottom: 0;
+        font-size: 30px;
+        font-family: Dancing Script;
+        font-weight: 600;
+        background-image: linear-gradient(
+          135deg,
+          rgb(0, 102, 255),
+          rgb(192, 238, 255)
+        );
+        background-clip: Text;
+        color: transparent;
+        -webkit-background-clip: Text;
+        user-select: none;
+        cursor: pointer;
+      }
+      .rightnav {
+        margin-left: auto;
+      }
+      .profile {
+        height: 30px;
+        aspect-ratio: 1;
+        cursor: pointer;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background-image: url(Assets/uicomponents/profilesvg.svg);
+        background-position: center;
+        background-size: cover;
+        margin-right: 10px;
+      }
+      /*  */
+      .backgroundimage {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        height: 400px;
+        width: 100vw;
+        background-image: linear-gradient(
+          135deg,
+          rgb(0, 102, 255),
+          rgb(192, 238, 255)
+        );
+        mask-image: linear-gradient(black, transparent);
+        -webkit-mask-image: linear-gradient(black, transparent);
+        z-index: -1;
+      }
+      /*  */
+      /*  */
+      .createyourown {
+        height: 50px;
+        width: 100vw;
+        position: fixed;
+        bottom: 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+      }
+      .createyourown a {
+        height: 35px;
+        width: 200px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 18px;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .createyourown a img {
+        height: 70%;
+        margin-left: 7px;
+      }
+      .createyourown a p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      .createyourown a div {
+        height: 100%;
+        width: 200%;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        background: linear-gradient(
+          90deg,
+          rgb(255, 0, 247),
+          rgb(0, 200, 255),
+          rgb(255, 0, 247)
+        );
+        z-index: -1;
+        pointer-events: none;
+        transition: 0.3s;
+      }
+      .createyourown a:hover div {
+        left: 0%;
+      }
+      /*  */
+      .cardcontainer {
+        height: 320px;
+        width: calc(100vw - 20px);
+        max-width: 80vw;
+        background-color: rgb(255, 255, 255);
+        border-radius: 15px;
+        margin: auto;
+        margin-top: 20px;
+        padding: 10px;
+        box-sizing: border-box;
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .cardcontainertitle {
+        width: fit-content;
+        font-size: 25px;
+        font-family: Dancing Script;
+        margin: 5px 0 0 10px;
+        font-weight: 700;
+        background-image: linear-gradient(
+          135deg,
+          rgb(0, 102, 255),
+          rgb(192, 238, 255)
+        );
+        background-clip: Text;
+        color: transparent;
+        -webkit-background-clip: Text;
+      }
+      .cardsscrollcontainer {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        height: 250px;
+        overflow-x: scroll;
+        margin-top: auto;
+        border-radius: 0px 0px 10px 10px;
+      }
+      .cardsscrollcontainer::-webkit-scrollbar {
+        height: 0px;
+      }
+      .card {
+        height: 100%;
+        aspect-ratio: 3/5;
+        background: url("Assets/Backgrounds/Static/background1.jpg") center /
+          100% 100%;
+        border-radius: 10px;
+      }
+    </style>
+    <!-- form -->
+    <style>
+      .formpage {
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: grid;
+        place-content: center;
+        backdrop-filter: blur(10px);
+        display: none;
+        z-index: 100;
+      }
+      .canclebutton {
+        height: 40px;
+        width: 40px;
+        position: fixed;
+        border-radius: 50%;
+        right: 10px;
+        top: 10px;
+        background: url(Assets/uicomponents/cross.svg) center / contain;
+        background-color: white;
+        cursor: pointer;
+      }
+      /* signup form */
+      .signup_form-container {
+        width: 350px;
+        height: 500px;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 20px 30px;
+        display: none;
+      }
+      /* login form  */
+      .login_form-container {
+        width: 350px;
+        height: 500px;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 20px 30px;
+        display: none;
+      }
+      .title {
+        text-align: center;
+        margin: 10px 0 30px 0;
+      }
+
+      .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 15px;
+      }
+
+      .input {
+        border-radius: 20px;
+        border: 1px solid #c0c0c0;
+        outline: 0 !important;
+        box-sizing: border-box;
+        padding: 12px 15px;
+      }
+
+      .page-link {
+        text-decoration: underline;
+        margin: 0;
+        text-align: end;
+        color: #747474;
+        text-decoration-color: #747474;
+      }
+
+      .page-link-label {
+        cursor: pointer;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+      }
+
+      .page-link-label:hover {
+        color: #000;
+      }
+
+      .form-btn {
+        padding: 10px 15px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        border-radius: 20px;
+        border: 0 !important;
+        outline: 0 !important;
+        background: teal;
+        color: white;
+        cursor: pointer;
+      }
+
+      .form-btn:active {
+        box-shadow: none;
+      }
+
+      .sign-up-label {
+        text-align: center;
+        font-size: 10px;
+        color: #747474;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      .sign-up-link {
+        margin-left: 1px;
+        font-size: 11px;
+        text-decoration: underline;
+        text-decoration-color: teal;
+        color: teal;
+        cursor: pointer;
+        font-weight: 800;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      .buttons-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 20px;
+        gap: 15px;
+      }
+
+      .apple-login-button,
+      .google-login-button {
+        border-radius: 20px;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 11px;
+        gap: 5px;
+      }
+
+      .apple-login-button {
+        background-color: #000;
+        color: #fff;
+        border: 1px solid #000;
+      }
+
+      .google-login-button {
+        border: 1px solid #747474;
+      }
+
+      .apple-icon,
+      .google-icon {
+        font-size: 18px;
+        margin-bottom: 1px;
+      }
+    </style>
+    <!-- alert -->
+    <style>
+      /* alert */
+      .alert {
+        position: fixed;
+        height: 60px;
+        width: calc(100% - 20px);
+        max-width: 400px;
+        background-image: linear-gradient(135deg, grey, rgb(83, 83, 83));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 500;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 10px;
+        animation: alertshow 0.3s forwards;
+        display: none;
+      }
+      .alert img {
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+      .alert .message {
+        color: white;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .alert button {
+        height: 100%;
+        aspect-ratio: 1;
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .alert button:hover {
+        background-color: rgb(0, 170, 255);
+      }
+      .loadingline {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 20px);
+        border-radius: 5px;
+        height: 2px;
+        background-color: rgb(0, 170, 255);
+        animation: laodinglineanimation 3s linear forwards;
+      }
+      @keyframes laodinglineanimation {
+        0% {
+          width: calc(100% - 20px);
+        }
+        100% {
+          width: 0;
+        }
+      }
+      @keyframes alertshow {
+        0% {
+          top: 0;
+        }
+        100% {
+          top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="alert">
+      <img src="Assets/uicomponents/alert1.svg" alt="" />
+      <div class="message"></div>
+      <button onclick="hidealert()">X</button>
+      <div class="loadingline"></div>
+    </div>
+    <div class="backgroundimage"></div>
+    <nav>
+      <div class="leftnav">
+        <img class="menubutton" src="Assets/uicomponents/menu.svg" alt="" />
+        <div class="logo">Online Invitation</div>
+      </div>
+      <div class="rightnav">
+        <div
+          class="profile"
+          onclick="toggleforms('login_form-container', 'block', true)"
+        ></div>
+      </div>
+    </nav>
+    <div class="createyourown">
+      <a href="./editer.html">
+        <img src="Assets/uicomponents/plus-circle-svg.svg" alt="" />
+        <p>Create</p>
+        <div></div>
+      </a>
+    </div>
+    <!-- headlines -->
+    <style>
+      .highlightscontainer {
+        position: relative;
+        height: 400px;
+        width: 80vw;
+        overflow: hidden;
+        box-sizing: border-box;
+        color: white;
+        margin: auto;
+        border-radius: 12px;
+        margin-top: 100px;
+        margin-bottom: 50px;
+      }
+      .highlightscontainer:hover .buttons {
+        opacity: 1;
+      }
+      .highlightscrollingscontainer {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: absolute;
+        transition: 0.4s;
+      }
+      .headingcards {
+        box-sizing: border-box;
+        height: 100%;
+        aspect-ratio: 1;
+        background-image: url("https://t3.ftcdn.net/jpg/05/73/95/90/360_F_573959050_BXeecXwfgIlMFGdOfHRiSdedBealWU5Q.jpg");
+        background-size: cover;
+        background-position: center;
+        transition: 0.4s;
+        border-radius: 12px;
+        transform: translateX(-785px);
+        filter: brightness(0.6);
+      }
+      .headingcards::before {
+        position: absolute;
+        content: "";
+        inset: 0;
+        background-image: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.486),
+          transparent
+        );
+        border-radius: inherit;
+        z-index: 0;
+      }
+      .headingcards:nth-of-type(3) {
+        aspect-ratio: 7/4;
+        filter: brightness(1);
+        font-size: 25px;
+      }
+      .highlightstext {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 10%;
+        width: 300px;
+        transform: translateY(-50%);
+      }
+      /*  */
+      .highlightscontainer button {
+        position: absolute;
+        height: 50px;
+        aspect-ratio: 1;
+        top: calc(50% - 25px);
+        cursor: pointer;
+        border: none;
+        border-radius: 50%;
+        background-color: transparent;
+        background-image: url(Assets/uicomponents/arrow.svg);
+        background-position: center;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        z-index: 10;
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .highlightscontainer:hover button {
+        opacity: 1;
+      }
+      .highlightscontainer button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      .highlightscontainer .left {
+        transform: rotate(180deg);
+        left: 20px;
+      }
+      .highlightscontainer .right {
+        left: unset;
+        right: 20px;
+      }
+      .specialright,
+      .specialleft {
+        position: absolute;
+        height: 100%;
+        width: 300px;
+        left: 745px;
+        z-index: 10;
+        opacity: 0;
+      }
+      .specialleft {
+        left: 0;
+        width: 25px;
+      }
+      /* dotts */
+      .dottscontainer {
+        position: absolute;
+        width: 200px;
+        left: calc(50% - 100px);
+        height: 30px;
+        bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .dotts {
+        height: 6px;
+        aspect-ratio: 1;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+      }
+      .dotts:nth-of-type(1) {
+        background-color: var(--theme);
+        height: 10px;
+      }
+      /* mobile view */
+      @media screen and (width<450px) {
+        .highlightscontainer {
+          height: unset;
+          width: calc(100% - 20px);
+          aspect-ratio: 7/4;
+        }
+        .headingcards {
+          height: 100%;
+          transform: translateX(calc((-100vw - 20px) * 7 / 6 + 40px));
+        }
+        .highlightscontainer button {
+          height: 100%;
+          aspect-ratio: unset;
+          width: 30px;
+          top: 0;
+          background-color: transparent;
+          border-radius: unset;
+          opacity: 1;
+          outline: none;
+        }
+        .highlightscontainer button:hover {
+          background-color: unset;
+        }
+      }
+    </style>
+    <div class="highlightscontainer">
+      <div class="specialleft" onclick="highlightsmove('left')"></div>
+      <button class="left" onclick="highlightsmove('left')"></button>
+      <div class="specialright" onclick="highlightsmove('right')"></div>
+      <button class="right" onclick="highlightsmove('right')"></button>
+      <div class="highlightscrollingscontainer">
+        <div class="headingcards">
+          <div class="highlightstext">3. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">4. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">1. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">2. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">3. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">4. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">1. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">2. Life was fun when we were kids...</div>
+        </div>
+        <div class="headingcards">
+          <div class="highlightstext">3. Life was fun when we were kids...</div>
+        </div>
+      </div>
+      <div class="dottscontainer"></div>
+    </div>
+    <script>
+      let highlightcards = document.querySelectorAll(".headingcards");
+      let hightlightscontainer = document.querySelector(
+        ".highlightscrollingscontainer"
+      );
+      let arraylength = 4;
+      // add dotts
+      for (let i = 0; i < arraylength; i++) {
+        let dotts = document.createElement("div");
+        dotts.classList.add("dotts");
+        document.querySelector(".dottscontainer").appendChild(dotts);
+      }
+      function changedottscolor(value) {
+        if (value == arraylength) {
+          value = 0;
+        }
+        if (value == -1) {
+          value = arraylength - 1;
+        }
+        document.querySelectorAll(".dotts").forEach((item, i) => {
+          if (value == i) {
+            item.style.backgroundColor = " var(--theme)";
+            item.style.height = "10px";
+          } else {
+            item.style.backgroundColor = "white";
+            item.style.height = "6px";
+          }
+        });
+      }
+      //
+      let highlightscrolltimer;
+      let highlightsscrollvalue = 0;
+      function highlightsmove(dir) {
+        clearInterval(highlightscrolltimer);
+        sethighlightscrolltimer();
+        // left move
+        if (dir == "left") {
+          highlightcards.forEach((item) => {
+            item.style.transition = "0.4s";
+          });
+          hightlightscontainer.style.transition = "0.4s";
+          highlightsscrollvalue -= 1;
+          changedottscolor(highlightsscrollvalue);
+          //
+          if (window.innerWidth < 450) {
+            hightlightscontainer.style.transform =
+              "translateX(" +
+              -(
+                highlightsscrollvalue *
+                (((window.innerWidth - 20) * 4) / 7 + 10)
+              ) +
+              "px)";
+          } else {
+            hightlightscontainer.style.transform =
+              "translateX(" + -(highlightsscrollvalue * 410) + "px)";
+          }
+
+          changestyleofhighlights();
+          //
+          if (highlightsscrollvalue == -1) {
+            setTimeout(() => {
+              highlightcards.forEach((item) => {
+                item.style.transition = "none";
+              });
+              //
+              hightlightscontainer.style.transition = "none";
+              highlightsscrollvalue = arraylength - 1;
+              //
+              if (window.innerWidth < 450) {
+                hightlightscontainer.style.transform =
+                  "translateX(" +
+                  -(
+                    highlightsscrollvalue *
+                    (((window.innerWidth - 20) * 4) / 7 + 10)
+                  ) +
+                  "px)";
+              } else {
+                hightlightscontainer.style.transform =
+                  "translateX(" + -(highlightsscrollvalue * 410) + "px)";
+              }
+              changestyleofhighlights();
+            }, 400);
+          }
+        }
+        // right move
+        if (dir == "right") {
+          highlightcards.forEach((item) => {
+            item.style.transition = "0.4s";
+          });
+          hightlightscontainer.style.transition = "0.4s";
+          highlightsscrollvalue += 1;
+          changedottscolor(highlightsscrollvalue);
+          if (window.innerWidth < 450) {
+            hightlightscontainer.style.transform =
+              "translateX(-" +
+              highlightsscrollvalue *
+                (((window.innerWidth - 20) * 4) / 7 + 10) +
+              "px)";
+          } else {
+            hightlightscontainer.style.transform =
+              "translateX(-" + highlightsscrollvalue * 410 + "px)";
+          }
+          changestyleofhighlights();
+          if (highlightsscrollvalue == arraylength) {
+            setTimeout(() => {
+              highlightcards.forEach((item) => {
+                item.style.transition = "none";
+              });
+              //
+              hightlightscontainer.style.transition = "none";
+              highlightsscrollvalue = 0;
+              if (window.innerWidth < 450) {
+                hightlightscontainer.style.transform =
+                  "translateX(-" +
+                  highlightsscrollvalue *
+                    (((window.innerWidth - 20) * 4) / 7 + 10) +
+                  "px)";
+              } else {
+                hightlightscontainer.style.transform =
+                  "translateX(-" + highlightsscrollvalue * 410 + "px)";
+              }
+              changestyleofhighlights();
+            }, 400);
+          }
+        }
+      }
+      //
+      function changestyleofhighlights() {
+        highlightcards.forEach((item, i) => {
+          item.style.aspectRatio = "1";
+          item.style.filter = "brightness(0.6)";
+          item.style.fontSize = "20px";
+          if (i == highlightsscrollvalue + 2) {
+            item.style.aspectRatio = "7/4";
+            item.style.filter = "brightness(1)";
+            item.style.fontSize = "25px";
+          }
+        });
+      }
+      // auto move highlights
+      function sethighlightscrolltimer() {
+        highlightscrolltimer = setInterval(() => {
+          highlightsmove("right");
+        }, 5000);
+      }
+      sethighlightscrolltimer();
+    </script>
+    <!--  -->
+    <div class="cardcontainer">
+      <div class="cardcontainertitle">Wedding cards</div>
+      <div class="cardsscrollcontainer">
+        <a href="./editer.html?id=6577e34927ebde3cd9db6a99">
+          <div class="card"></div>
+        </a>
+        <a href="./editer.html?id=6577e34927ebde3cd9db6a99">
+          <div class="card"></div>
+        </a>
+        <a href="./editer.html?id=6577e34927ebde3cd9db6a99">
+          <div class="card"></div>
+        </a>
+        <a href="./editer.html?id=6577e34927ebde3cd9db6a99">
+          <div class="card"></div>
+        </a>
+        <a href="./editer.html?id=6577e34927ebde3cd9db6a99">
+          <div class="card"></div>
+        </a>
+        <a href="./editer.html?id=6577e34927ebde3cd9db6a99">
+          <div class="card"></div>
+        </a>
+      </div>
+    </div>
+    <div class="cardcontainer">
+      <div class="cardcontainertitle">Wedding cards</div>
+      <div class="cardsscrollcontainer"></div>
+    </div>
+    <div class="cardcontainer">
+      <div class="cardcontainertitle">Wedding cards</div>
+      <div class="cardsscrollcontainer"></div>
+    </div>
+    <!-- login form -->
+    <div class="formpage">
+      <div
+        class="canclebutton"
+        onclick="toggleforms('login_form-container', 'block', false)"
+      ></div>
+      <!-- signupform -->
+      <div class="signup_form-container forms">
+        <p class="title logo">Online Invitation</p>
+        <form class="form">
+          <input
+            type="email"
+            class="input"
+            placeholder="Email"
+            id="signup_email"
+          />
+          <input
+            type="password"
+            id="signup_password"
+            class="input"
+            placeholder="Password"
+          />
+          <p class="page-link">
+            <span class="page-link-label">Forgot Password?</span>
+          </p>
+          <button type="button" class="form-btn" onclick="Signup()">
+            Sign up
+          </button>
+        </form>
+        <p class="sign-up-label">
+          Already have an account?<span
+            class="sign-up-link"
+            onclick="toggleforms('login_form-container', 'block', true)"
+            >Log in</span
+          >
+        </p>
+        <div class="buttons-container">
+          <div class="apple-login-button">
+            <img src="Assets/uicomponents/appleicon.svg" alt="" />
+            <span>Sign up with Apple</span>
+          </div>
+          <div class="google-login-button">
+            <img src="Assets/uicomponents/googleicon.svg" alt="" />
+            <span>Sign up with Google</span>
+          </div>
+        </div>
+      </div>
+      <!-- login form -->
+      <div class="login_form-container forms">
+        <p class="title logo">Online Invitation</p>
+        <form class="form">
+          <input
+            type="email"
+            id="login_email"
+            class="input"
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            id="login_password"
+            class="input"
+            placeholder="Password"
+          />
+          <p class="page-link">
+            <span class="page-link-label">Forgot Password?</span>
+          </p>
+          <button type="button" class="form-btn" onclick="Login()">
+            Log in
+          </button>
+        </form>
+        <p class="sign-up-label">
+          Don't have an account?<span
+            class="sign-up-link"
+            onclick="toggleforms('signup_form-container', 'block', true)"
+            >Sign up</span
+          >
+        </p>
+        <div class="buttons-container">
+          <div class="apple-login-button">
+            <img src="Assets/uicomponents/appleicon.svg" alt="" />
+            <span>Log in with Apple</span>
+          </div>
+          <div class="google-login-button">
+            <img src="Assets/uicomponents/googleicon.svg" alt="" />
+            <span>Log in with Google</span>
+          </div>
+        </div>
+      </div>
+      <!-- forget apssword -->
+    </div>
+    <!-- ui -->
+    <script>
+      // show alert
+      let alerttimer;
+      function showalertbox(value) {
+        document.querySelector(".alert").style.display = "none";
+        setTimeout(() => {
+          document.querySelector(".alert").style.display = "flex";
+          document.querySelector(".message").innerHTML = value;
+          clearTimeout(alerttimer);
+          alerttimer = setTimeout(() => {
+            document.querySelector(".alert").style.display = "none";
+          }, 3000);
+        }, 1);
+      }
+      // hidealert
+      function hidealert() {
+        document.querySelector(".alert").style.display = "none";
+      }
+      // check loged in or not
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+      console.log(getCookie("token"));
+    </script>
+    <!-- signup and login  -->
+    <script>
+      // toggle forms
+      function toggleforms(value, displaytype, formpage) {
+        document.querySelectorAll(".forms").forEach((item) => {
+          item.style.display = "none";
+        });
+        document.querySelector("." + value).style.display = displaytype;
+        if (formpage) {
+          document.querySelector(".formpage").style.display = "grid";
+        } else {
+          document.querySelector(".formpage").style.display = "none";
+        }
+      }
+      // signup
+      function Signup() {
+        data = {
+          email: document.getElementById("signup_email").value,
+          password: document.getElementById("signup_password").value,
+        };
+        if (
+          data.email != "" &&
+          data.password.length >= 8 &&
+          data.email.includes("@")
+        ) {
+          fetch("/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              showalertbox(res.message);
+            });
+        } else {
+          if (data.email == "") {
+            showalertbox("Please enter an Email");
+          } else if (!data.email.includes("@")) {
+            showalertbox("Invalid Email");
+          } else if (data.password.length < 8) {
+            showalertbox("Password must be above 8 characters");
+          }
+        }
+      }
+      // login
+      function Login() {
+        data = {
+          email: document.getElementById("login_email").value,
+          password: document.getElementById("login_password").value,
+        };
+        if (
+          data.email != "" &&
+          data.password.length >= 8 &&
+          data.email.includes("@")
+        ) {
+          fetch("/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              showalertbox(res.message);
+            });
+        } else {
+          if (data.email == "") {
+            showalertbox("Please enter an Email");
+          } else if (!data.email.includes("@")) {
+            showalertbox("Invalid Email");
+          } else if (data.password.length < 8) {
+            showalertbox("Password must be above 8 characters");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
