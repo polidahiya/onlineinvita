@@ -13,7 +13,7 @@ require("dotenv").config();
 //
 app.use(express.static("./build"));
 
-const db_link = process.env.DATABASE_URL;
+const db_link = "mongodb+srv://polidahiya830:12er56ui90%40Poli@cluster0.pvrgiqn.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(db_link).then(async function () {
   const client = new MongoClient(db_link);
