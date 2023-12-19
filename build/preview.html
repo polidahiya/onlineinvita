@@ -32,6 +32,7 @@
       }
       .hideeffectbutton {
         position: fixed;
+        width: 100px;
         bottom: 10px;
         right: 10px;
         color: white;
@@ -39,6 +40,8 @@
         padding: 10px;
         background-color: transparent;
         border-radius: 100px;
+        z-index: 100;
+        backdrop-filter: blur(10px);
       }
       .hideeffectbutton:hover {
         background-color: rgb(0, 170, 255);
@@ -521,6 +524,22 @@
         }
         100% {
           transform: rotateX(-70deg) rotateY(0deg) rotateZ(-115deg);
+        }
+      }
+    </style>
+    <!-- mobile css -->
+    <style>
+      @media screen and (width<450px) {
+        .hideeffectbutton:hover {
+          background-color: unset;
+        }
+        .main {
+          width: 100%;
+          max-width: unset;
+        }
+        .menu {
+          width: 100%;
+          border-left: unset;
         }
       }
     </style>

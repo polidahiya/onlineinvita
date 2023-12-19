@@ -11,6 +11,9 @@
       rel="stylesheet"
     />
     <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
       body {
         margin: 0;
         --white: white;
@@ -29,6 +32,86 @@
         border-radius: 20px;
         background-color: rgb(0, 157, 255);
       }
+      /* input range */
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 20px;
+        border-radius: 5px;
+        background-color: transparent;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 20px;
+        aspect-ratio: 1;
+        background: var(--theme);
+        border-radius: 50%;
+        cursor: pointer;
+        transform: translateY(calc(-50% + 1px));
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 2px;
+        background-color: white;
+      }
+      /* saveas */
+      .saveasscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        place-content: center;
+        height: 100vh;
+        width: 100vw;
+        z-index: 200;
+        backdrop-filter: blur(10px);
+      }
+      .saveascontainer {
+        width: 250px;
+        aspect-ratio: 5/4;
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 1.5px solid rgb(117, 117, 117);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+      }
+      .saveascontainer p {
+        color: white;
+        font-size: 25px;
+      }
+      .saveascontainer input {
+        background-color: transparent;
+        border-radius: 100px;
+        height: 30px;
+        width: 80%;
+        color: white;
+        outline: none;
+        text-indent: 20px;
+      }
+      .buttonscontainer {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+      }
+      .buttonscontainer button {
+        background-color: white;
+        border: none;
+        height: 100%;
+        width: 70px;
+        border-radius: 100px;
+        cursor: pointer;
+      }
+      .buttonscontainer .save:hover {
+        background-color: rgb(0, 216, 0);
+        color: white;
+      }
+      /*  */
       nav {
         position: fixed;
         top: 0;
@@ -352,6 +435,7 @@
         position: relative;
       }
       .effectsinnercontainer div {
+        color: var(--theme);
         position: absolute;
         right: 0;
         top: 15px;
@@ -678,6 +762,10 @@
           min-height: 100dvh;
           overflow: hidden;
         }
+        ::-webkit-scrollbar {
+          background-color: transparent;
+          width: 0px;
+        }
         main {
           height: calc(100dvh - 120px);
         }
@@ -701,6 +789,7 @@
           z-index: 200;
           padding-inline: 20px;
           overflow-x: scroll;
+          overflow-y: hidden;
           box-sizing: border-box;
         }
         .toolmenu::-webkit-scrollbar {
@@ -755,9 +844,10 @@
         }
         /*  */
         .selectMenu {
+          border-radius: 10px;
           height: calc(100dvh - 120px);
           padding-bottom: 10px;
-          width: 200px;
+          width: 30%;
         }
         .selectMenuInOutButton {
           left: -50px;
@@ -768,6 +858,25 @@
           box-sizing: border-box;
           clip-path: unset;
           border: 1px solid white;
+        }
+        /*  */
+        .sidemenubackgrounds,
+        .imagesettings,
+        .imagemasks,
+        .fontfamilycontainer,
+        .animationscontainer,
+        .effectscontainer {
+          padding: 0px 3px;
+        }
+        .gradientcolorcontainer,
+        .glowcontainer {
+          border-radius: 10px;
+        }
+        .gradientcolorcontainer input[type="range"] {
+          width: 90%;
+        }
+        .glowcontainer input[type="range"] {
+          width: 90%;
         }
       }
     </style>
@@ -783,7 +892,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        top: 10px;
+        top: 50px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 500;
@@ -835,10 +944,10 @@
       }
       @keyframes alertshow {
         0% {
-          top: 0;
+          transform: translateX(-50%) translateY(0px);
         }
         100% {
-          top: 10px;
+          transform: translateX(-50%) translateY(20px);
         }
       }
     </style>
@@ -848,12 +957,25 @@
       <div></div>
       <span>Saving...</span>
     </div>
+    <!--  -->
     <div class="alert">
       <img src="Assets/uicomponents/alert1.svg" alt="" />
       <div class="message"></div>
       <button onclick="hidealert()">X</button>
       <div class="loadingline"></div>
     </div>
+    <!--  -->
+    <div class="saveasscreen">
+      <div class="saveascontainer">
+        <p>Save as</p>
+        <input type="text" name="" id="projectname"  />
+        <div class="buttonscontainer">
+          <button class="save" onclick="prewiew()">Save</button>
+          <button class="cancel" onclick="hidesaveas()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <!--  -->
     <nav>
       <div class="leftnav">
         <img class="menubutton" src="Assets/uicomponents/menu.svg" alt="" />
@@ -921,7 +1043,7 @@
       </div>
       <div
         class="tooloption savebutton"
-        onclick="prewiew(),leftsidemenueff(this)"
+        onclick="showsaveas(),leftsidemenueff(this)"
       >
         <img src="Assets/uicomponents/savesvg.svg" alt="" />
         <p>Save</p>
@@ -1319,16 +1441,6 @@
           });
         button.style.backgroundColor = "rgb(70, 70, 70)";
       }
-      // mobile toolmenu
-      let mobiletooloptions = document.querySelectorAll(".mobiletooloption");
-      mobiletooloptions.forEach((item, i) => {
-        item.onclick = (e) => {
-          mobiletooloptions.forEach((item, i) => {
-            item.querySelector("p").style.color = "white";
-          });
-          item.querySelector("p").style.color = "skyblue";
-        };
-      });
       // responsivelayout
       if (window.innerWidth <= 450) {
         flags.rightSideMenuFlag = true;
@@ -2735,8 +2847,22 @@
     </script>
     <!-- preview and data share script -->
     <script>
+      // saveas
+      function showsaveas() {
+        document.querySelector(".saveasscreen").style.display = "grid";
+        document.querySelector("#projectname").focus()
+        document.querySelector("#projectname").value="Untitled-1"
+        document.querySelector("#projectname").select()
+        document.querySelector("#projectname").setSelectionRange(0, 99999)
+
+      }
+      function hidesaveas() {
+        document.querySelector(".saveasscreen").style.display = "none";
+      }
+      //preview
       function prewiew() {
         let data = {
+          name:document.querySelector("#projectname").value,
           cardwidth: previewRect.offsetWidth,
           cardheight: previewRect.offsetHeight,
           cardbackground: previewRect.style.backgroundImage,
@@ -2793,6 +2919,7 @@
           .then((response) => response.json())
           .then((data) => {
             setTimeout(() => {
+              hidesaveas()
               document.querySelector(".loading").style.display = "none";
               window.open("/preview.html?id=" + data.id);
             }, 2500);
