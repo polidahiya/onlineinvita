@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "online-invitation-storage",
+  "private_key_id": "47651094aabde834c571e836e31d1e0385cd21ea",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDUKTfx/2+0vgT9\npST6I3OpL9xaNanH0yM2nPfCrQaO9ikuZAhcq7QtkRM8KJyWk8LgJa0tss7FRduH\nItew6n+NbizyL/s4Q1rgw53GPrBKG7eafuOVEw1ERorZAajklfMKEmwhqu29By6z\nLc0GBQ8QYoVyurM3OXF+8/ql7AeFw1hStoGkF6Ai0FDc8t8TzvWlY9GoK/x8bOk9\nyZUcFsTG3XJh8Gm5vzxhlYGUP9+8k+y9m98pdu/hGQNNcsdn4MrSIDX0yW4DA5Pf\nqbuhxpdhRE5w+ubGThNFZr0f+4+BAaP9IzakH7jF+Yp6zJkz6qd/XlM6CweDUzdP\nqw0E1G6zAgMBAAECggEAWxG8YYTvisp8MvKGDldUaP3R3OknEU7o0SMM2QRTid9R\nawfmbP0JUPvyoUKfgKU5o+SYU0LrLdPgOUA0DM2D5g4yfd0pvYtwAYYGfhffrVf7\ndnZcM1vjuHh9Vkw3lrNlCWBCCSupdBgWrDQPSzO1tSdNOCO7FQvz03ZgE4Pe8MPS\nCJCmo8v4nYtsp81lTnkRdUTGNfuoN7F8Zfi2R9NvOK858qdsmOnDW3Zt9HxuKSSS\nlvdTujrR3N50HNAQzRCfh4xn/MJp1yxufBcBJVaW821ngEL6+L+PxnXIIe1MtRI7\nKU03lsKlKfcogypeKP7iOFhXiabmICWsUz/+KgcZGQKBgQD/QgKdDW7SHhsTY6Vr\nmSXB0naviuafuuBbUP2YtKTW4XwTzhd+HoR7oWWxZGiLG5C50LvFtMBd9Qh2A7D/\ny+NNGuGnh83JPy8uGIiEEWRWZJcJk0dJjev/TQikSlOCI/4qsN1nQy8q4TgEHcNw\nhYGm5fItc7BsEvefyDiMdxceyQKBgQDUxyGQ0V4oQ53iAtK1K2eT2rtqOdQM5Q92\nnGHy9l1wn2j2WInaBsMoHe7/lesQFzrijqdMncNsT0Md7EiQqoq/L17+T2dpLl8T\n0BkX0dWSjkexsofj95AK4QQh5FE+tJIoMoeRiycqLryrjqVrLCxkwfer8UZ0/Y/F\nsdeCfLzzmwKBgQDHX9LUwuo9ekBhu6I4Uc2Y/3+ui0qplnipOrBptydNo5+bhIz6\n+HE4c48PqMKzbNt1F6GiwhTDDqIGM8nrcmBfGFEK3tsQhqaeVZFDvqXliPokA4JZ\n5F1h8tR+JoPlkaFzzOOSRXqw/msXY/wEhnMHXnHzqHozX/lEN0pcBKTtaQKBgQCk\nFzGGikAP0x12B/FRMDj/qEayRAiJLTlAopdTFLW4vebnXB5rWp20WWlQB+Cwlwmd\nYKAakOv9oh7De832at73U+PxQXEhh1ZhZDGF0hffnwQhQOpVXzzhduiF7prNPdod\nT+KG1oaMnGB5+VcOkJFn3sJPApHwdP8kWeM2SVY6kwKBgQCgEfxC59ZwzFLqBHy6\nO8bimKhcbWa51O4X/dlbTP272KAudQ9yykIrzO/SVhUbSelH3ELdR5FpUkl5z61x\nyJXJ18xFv7euVvl+7u6jMmHt2nt68isdCveftmngBh9wTqxZVIE1V3k3w8C0nQE7\nVN1nAfzgbADF6j/3Wsr9jzWGTg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "online-invitation@online-invitation-storage.iam.gserviceaccount.com",
+  "client_id": "117290109378105908314",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/online-invitation%40online-invitation-storage.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
