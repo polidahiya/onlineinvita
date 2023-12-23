@@ -27,8 +27,8 @@ mongoose.connect(db_link).then(async function () {
   const cards = db.collection("cards");
 
   console.log("listening");
-  // get previewdata
 
+  // get previewdata
   app.get("/previewdata", async (req, res) => {
     try {
       let search;
@@ -60,6 +60,7 @@ mongoose.connect(db_link).then(async function () {
     async (req, res) => {
       try {
         const formData = JSON.parse(req.body.data);
+        formData.email = req.email;
         let result = await cards.insertOne(formData);
         res.json({
           message: "Saved Successfully",
@@ -71,8 +72,8 @@ mongoose.connect(db_link).then(async function () {
     }
   );
 
-  //cards
-  app.get("/task", verifyToken, async (req, res) => {
+  //mycards
+  app.get("/mycards", verifyToken, async (req, res) => {
     try {
       console.log("task get req");
       const result = await cards.find({ email: req.email }).toArray();
@@ -117,11 +118,11 @@ mongoose.connect(db_link).then(async function () {
   // delete
   app.post("/Deletetask", verifyToken, async (req, res) => {
     try {
-      console.log("deletetask req");
-      await cards.deleteOne({ taskid: Number(req.body.taskid) });
+      let search = new ObjectId(req.body.id);
+      await cards.deleteOne({ _id: search });
       //
       res.json({
-        message: "Task deleted successfully",
+        message: "Delete successfull",
       });
     } catch (error) {
       console.log(error);
