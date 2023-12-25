@@ -163,8 +163,13 @@ mongoose.connect(db_link).then(async function () {
               }
             );
             res.cookie(`token`, token, {
+              httpOnly: true,
               sameSite: "lax",
-              maxAge: 24 * 60 * 60 * 1000,
+              maxAge: 2 * 24 * 60 * 60 * 1000, //two days
+            });
+            res.cookie(`logedin`, true, {
+              sameSite: "lax",
+              maxAge: 2 * 24 * 60 * 60 * 1000, //two days
             });
             res.status(200).json({ message: "Login successful", token });
           } else {
@@ -182,7 +187,14 @@ mongoose.connect(db_link).then(async function () {
       console.log(error);
     }
   });
-
+  // logout
+  app.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.clearCookie("logedin");
+    res.json({
+      message: "logedout",
+    });
+  });
   // token verification
 
   function verifyToken(req, res, next) {
@@ -213,47 +225,5 @@ mongoose.connect(db_link).then(async function () {
       console.log("unlogined request");
       return res.json({ message: "Please login first" });
     }
-  }
-});
-
-// test
-// 1BBa_ID-1qsu7nMZpNt6QbK5cKON8y6xs
-const { google } = require("googleapis");
-// const { JWT } = require("google-auth-library");
-
-const keyFilePath = require("./online-invitation-storage-47651094aabd.json");
-
-const auth = new google.auth.GoogleAuth({
-  keyFile: keyFilePath,
-  scopes: ["https://www.googleapis.com/auth/drive"],
-});
-
-const drive = google.drive({ version: "v3", auth });
-app.post("/upload", async (req, res) => {
-  console.log(req.body);
-  try {
-    const base64Data = req.body.imagedata;
-    const tempImagePath = "./image.jpg";
-    base64Img.imgSync(base64Data, tempImagePath);
-
-    // Upload the image to Google Drive
-    const response = await drive.files.create({
-      requestBody: {
-        name: "uploaded_image.jpg", // Set the desired file name
-        mimeType: "image/jpeg",
-      },
-      media: {
-        mimeType: "image/jpeg",
-        body: require("fs").createReadStream(tempImagePath),
-      },
-    });
-
-    // Delete the temporary file
-    require("fs").unlinkSync(tempImagePath);
-
-    res.json(response.data);
-  } catch (error) {
-    console.error("Error:", error.message);
-    res.status(500).send("Internal Server Error");
   }
 });
